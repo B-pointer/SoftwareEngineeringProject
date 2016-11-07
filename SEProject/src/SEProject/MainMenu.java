@@ -1,4 +1,4 @@
-package testGUI;
+package SEProject;
 import java.awt.*;
 import java.awt.event.*;
 
