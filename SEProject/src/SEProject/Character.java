@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class Character {
+public class Character { ///throughout this need to replace magic numbers with variables for easier changing
 	
 	private Image characterImage;
 	//more stats and things go here
@@ -25,9 +25,13 @@ public class Character {
 	private int currentHealth;
 	private int maxHealth;
 	private int x;
+	
+	
 	private int attackPower;
 	private int defense;
-	BattlePane targetPanel;
+	
+	
+	BattlePane targetPanel;//may not be necessary, probably will be though for drawing images from files
 	
 	public Character(BattlePane bp)
 	{
@@ -72,15 +76,9 @@ public class Character {
 		
 	}
 	
-	public void animationA()
-	{
-		//int delay = 20;
-		//Timer timer = new Timer(delay, new animationListener());
-       // timer.start();
-		x+=5;
-	}
+
 	
-	public void update()
+	public void update()//trying to make the box move by calling this from BattlePane, couldnt get it to work
 	{
 		x +=5;
 		
