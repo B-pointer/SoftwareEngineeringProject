@@ -25,6 +25,8 @@ public class Character {
 	private int currentHealth;
 	private int maxHealth;
 	private int x;
+	private int attackPower;
+	private int defense;
 	BattlePane targetPanel;
 	
 	public Character(BattlePane bp)
