@@ -25,21 +25,32 @@ public class CharacterInfoPane extends JPanel{
 		
 		this.mFrame = maFrame;
 		
+		addButtonPanel();
+		
+		setBackground(Color.ORANGE);
+
+	}
+	
+	
+	private void addButtonPanel()
+	{
 		JPanel buttonPanel = new JPanel();
+		
 		buttonPanel.setPreferredSize(new Dimension(100, 300));
 		
 		JButton BackButton = new JButton("Back to Main Menu");
 		BackButton.setSize(100, 40);
 		BackButton.addActionListener(new BackListener());
 		buttonPanel.add(BackButton);
-		buttonPanel.setBackground(new Color(213, 45, 216));
-		buttonPanel.setBounds(170, 10, 300, 37);
+		
+		buttonPanel.setBackground(new Color(213, 45, 216));//sets the color of the panel behind the button, should be less obnoxious than current color
+		
+		buttonPanel.setBounds(170, 10, 300, 37);//location and size of button, use some named variables instead of magic numbers
+		
 		
 		add(buttonPanel);
 		
 		
-		setBackground(Color.ORANGE);
-
 	}
 	
 	public void paintComponent(Graphics g)
@@ -48,7 +59,7 @@ public class CharacterInfoPane extends JPanel{
 		
 		//g.drawRect(50, 100, 400, 400);
 		g.drawImage(terryImg, 50, 50, this); //this drew the picture, which needs to be updated
-		
+		g.drawString("Sample Text and stuff", 50, 500); //using drawString since adding a JTextArea or something similar sets the defualt position of the scrollbar to weird places
 		
 	}
 	
