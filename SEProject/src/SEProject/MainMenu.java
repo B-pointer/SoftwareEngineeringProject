@@ -12,6 +12,8 @@ public class MainMenu extends JPanel{
 	JButton StartButton; //buttons for navigation
 	JButton CharInfoButton;
 	
+	private final int buttonLength = 100;
+	private final int buttonHeight = 40;
 	
 	public MainMenu(mainFrame maFrame)
 	{
@@ -22,12 +24,12 @@ public class MainMenu extends JPanel{
 	    // terry = ii.getImage();
 		
 		StartButton = new JButton("Start Battle");
-		StartButton.setSize(100, 40);
+		StartButton.setSize(buttonLength, buttonHeight);
 		StartButton.addActionListener(new StartListener());
 		add(StartButton);
 		
 		CharInfoButton = new JButton("Character Info");
-		CharInfoButton.setSize(100, 40);
+		CharInfoButton.setSize(buttonLength, buttonHeight);
 		CharInfoButton.addActionListener(new CharInfoListener());
 		add(CharInfoButton);
 		

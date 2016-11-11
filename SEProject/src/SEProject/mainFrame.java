@@ -6,11 +6,13 @@ import javax.swing.*;
 
 public class mainFrame extends JFrame {
 
+	public static final int FRAME_WIDTH = 640;
+	public static final int FRAME_HEIGHT = 480;
 	
 	public mainFrame()/////ADDD A CONTROLLER INSTEAD OF MAKING THIS DO ALL THE PROCESSING, HAVE THIS CLASS SIMPLY BE THE FRAME?
 	{
 		add(new MainMenu(this));
-		setSize(640, 480);
+		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -61,7 +63,7 @@ public class mainFrame extends JFrame {
 		infoPane.setPreferredSize(new Dimension (640, 2000));
 		
 		JScrollPane scroller = new JScrollPane(infoPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		scroller.getVerticalScrollBar().setUnitIncrement(16); //this makes the scroll faster than default
 		
 		getContentPane().add(scroller);
 		getContentPane().revalidate();
