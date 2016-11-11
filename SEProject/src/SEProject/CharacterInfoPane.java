@@ -8,35 +8,10 @@ import javax.swing.*;
 public class CharacterInfoPane extends JPanel{
 	
 	mainFrame mFrame;
-	JScrollPane scrollPanel;
+	//JScrollPane scrollPanel;
 	
-	Image terryImg;
+	Image terryImg; //this was used to hold a picture for testing, but name can be changed. We will need 4 images (one for each class/character)
 	
-	/*public CharacterInfoPane()
-	{
-		
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-	      
-	    terryImg = toolkit.getImage("terryCrews.jpg");
-
-		//terryImg = ii.getImage();
-		
-		setPreferredSize(new Dimension(500, 1000));
-		
-		
-		JPanel buttonPanel = new JPanel();
-		
-		JButton BackButton = new JButton("Back to Main Menu");
-		BackButton.setSize(100, 40);
-		BackButton.addActionListener(new BackListener());
-		buttonPanel.add(BackButton);
-		add(buttonPanel, BorderLayout.NORTH);
-		
-
-		setBackground(Color.ORANGE);
-		
-	}
-	*/
 	public CharacterInfoPane(mainFrame maFrame)
 	{
 		
@@ -60,18 +35,9 @@ public class CharacterInfoPane extends JPanel{
 		
 		add(buttonPanel);
 		
-
-
-		
-		
-		
-		//scrollPanel = new JScrollPane(this);//, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		
 		
 		setBackground(Color.ORANGE);
-		
-		//mFrame.add(this);
+
 	}
 	
 	public void paintComponent(Graphics g)
@@ -79,11 +45,13 @@ public class CharacterInfoPane extends JPanel{
 		super.paintComponent(g);
 		
 		//g.drawRect(50, 100, 400, 400);
-		g.drawImage(terryImg, 50, 50, this);
+		g.drawImage(terryImg, 50, 50, this); //this drew the picture, which needs to be updated
 		
 		
 	}
 	
+	
+	//listener for the back button, sets active panel in main frame to a new main menu
 	private class BackListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)

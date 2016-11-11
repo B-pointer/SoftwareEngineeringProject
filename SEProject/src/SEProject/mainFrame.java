@@ -49,6 +49,8 @@ public class mainFrame extends JFrame {
 		getContentPane().revalidate();
 	}
 	
+	
+	//sets active panel to a new characterinfopane. Note that this actually sets the active panel to a JScrollPane, which has the character info pane added to it
 	public void setCharacterInfoPane()
 	{
 		getContentPane().removeAll();
@@ -67,6 +69,8 @@ public class mainFrame extends JFrame {
 		
 	}
 	
+	
+	//sets the panel to a battle pane
 	public void setBattlePane()
 	{
 		getContentPane().removeAll();
@@ -76,12 +80,11 @@ public class mainFrame extends JFrame {
 		getContentPane().revalidate();
 		
 	}
+	
+	//main method, creates a mainframe
 	public static void main(String[] args)
 	{
-		
 		mainFrame a = new mainFrame();
-		
-		
 	}
 	
 }
