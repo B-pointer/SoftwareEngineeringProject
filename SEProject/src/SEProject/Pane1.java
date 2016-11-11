@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-
+//this class is a test class and is not used, pretty much a template for the panels to be added to the frame
 public class Pane1 extends JPanel{
 	
 	mainFrame mFrame;

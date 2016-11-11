@@ -4,15 +4,13 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-
+//this is the panel for the main menu. has buttons for going to the character information screen and starting a battle
 public class MainMenu extends JPanel{
 	
-	mainFrame mFrame;
+	mainFrame mFrame; //mainframe, should be set to the frame that the main menu is added to. this allows for method calls to update the panels
 	
-	JButton StartButton;
+	JButton StartButton; //buttons for navigation
 	JButton CharInfoButton;
-	
-//	Image terry;
 	
 	
 	public MainMenu(mainFrame maFrame)
@@ -40,14 +38,7 @@ public class MainMenu extends JPanel{
 		mFrame.add(this);
 	}
 	
-	/*
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		g.drawImage(terry, 100, 100, this);
-	}
-	
-	*/
+	//Listener class for the start button, sets the active panel in the main frame to battle pane, needs to be updated so that it instead navigates to the character select screen
 	private class StartListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -57,6 +48,8 @@ public class MainMenu extends JPanel{
 
 		}
 	}
+	
+	//listener class for charInfo button, sets active panel in main frame to the character info pane
 	private class CharInfoListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)

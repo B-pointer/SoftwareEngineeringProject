@@ -7,7 +7,7 @@ import javax.swing.*;
 public class mainFrame extends JFrame {
 
 	
-	public mainFrame()/////ADDD A CONTROLLER INSTEAD OF MAKING THIS DO ALL THE PROCESSING, HAVE THIS CLASS SIMPLY BE THE FRAME
+	public mainFrame()/////ADDD A CONTROLLER INSTEAD OF MAKING THIS DO ALL THE PROCESSING, HAVE THIS CLASS SIMPLY BE THE FRAME?
 	{
 		add(new MainMenu(this));
 		setSize(640, 480);
@@ -17,7 +17,7 @@ public class mainFrame extends JFrame {
 		setResizable(false);
 	}
 
-		
+	//se4ts active panel to a new Pane1
 	public void set1()
 	{
 		getContentPane().removeAll();
@@ -28,7 +28,7 @@ public class mainFrame extends JFrame {
 		
 	}
 	
-	
+	//sets active panel to a new Pane2
 	public void set2()
 	{
 		getContentPane().removeAll();
@@ -39,6 +39,7 @@ public class mainFrame extends JFrame {
 		
 	}
 	
+	//sets active panel to new MainMenu
 	public void setMainMenu()
 	{
 		getContentPane().removeAll();
