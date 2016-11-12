@@ -23,13 +23,13 @@ public class BattlePane extends JPanel{
 	public BattlePane(mainFrame maFrame)//add player class
 	{
 		mFrame = maFrame;
-		
 		setLayout(null);
-		
 		addButtons();
-		
 		mFrame.add(this);
+		a =  new Character(this);
 	}
+	
+	
 	
 	private void addButtons()
 	{
@@ -52,9 +52,7 @@ public class BattlePane extends JPanel{
 		buttonPanel.add(healButton);
 		buttonPanel.add(chargeButton);
 		add(buttonPanel);
-		
-		a =  new Character(this);
-		
+
 	}
 	
 	public void drawHealthBars(Graphics g)
@@ -95,6 +93,8 @@ public class BattlePane extends JPanel{
 			System.out.println("Heal");		
 		}	
 	}
+	
+	
 	private class ChargeListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
