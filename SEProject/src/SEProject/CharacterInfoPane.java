@@ -18,7 +18,7 @@ public class CharacterInfoPane extends JPanel{
 		setLayout(null); //this sets the layoutmanager to null, so we can absolutely postition things with coordinates. generally bad practice to do this but since the drawing 
 						 //of game items is definitely going to require coordinate i feel like it is oko to mirror this throughout the system
 		
-		ImageIcon ii = new ImageIcon("terryCrews.jpg");
+		ImageIcon ii = new ImageIcon("characterInfoImages/terryCrews.jpg");
 	    terryImg = ii.getImage();
 	    
 		setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, 4 * mainFrame.FRAME_HEIGHT));
