@@ -19,7 +19,7 @@ public class mainFrame extends JFrame {
 		setResizable(false);
 	}
 
-	//se4ts active panel to a new Pane1
+	//sets active panel to a new Pane1
 	public void set1()
 	{
 		getContentPane().removeAll();
