@@ -12,6 +12,8 @@ public class CharacterInfoPane extends JPanel{
 	
 	Image terryImg; //this was used to hold a picture for testing, but name can be changed. We will need 4 images (one for each class/character)
 	
+	
+	//parameterized contructor
 	public CharacterInfoPane(mainFrame maFrame)
 	{
 		
@@ -29,6 +31,7 @@ public class CharacterInfoPane extends JPanel{
 	}
 	
 	
+	//adds buttons to button panel and then adds the button panel to the main panel
 	private void addButtonPanel()
 	{
 		JPanel buttonPanel = new JPanel();
@@ -46,10 +49,10 @@ public class CharacterInfoPane extends JPanel{
 		
 		
 		add(buttonPanel);
-		
-		
+	
 	}
 	
+	//overridden version paintComponent that draws the images of the classes and the descriptions
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);

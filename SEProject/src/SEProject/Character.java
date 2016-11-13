@@ -88,8 +88,5 @@ public class Character { ///throughout this need to replace magic numbers with v
 	{
 		x +=5;
 		
-	}
-	
-
-	
+	}	
 }
