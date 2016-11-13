@@ -33,6 +33,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	
 	BattlePane targetPanel;//may not be necessary, probably will be though for drawing images from files
 	
+	//parameterized constructor
 	public Character(BattlePane bp)
 	{
 		targetPanel = bp;
@@ -40,28 +41,33 @@ public class Character { ///throughout this need to replace magic numbers with v
 		currentHealth= 300;
 	}
 	
+	
+	//returns max health
 	public int getMaxHealth()
 	{
 		return maxHealth;
 	}
 	
+	//return currentHealth
 	public int getCurrentHealth()
 	{
 		return currentHealth;
 		
 	}
 	
-	
+	//deals damage, called by other palyer class in the battle
 	public void dealDamage(int damage)
 	{
 		currentHealth -= damage;
 		
 	}
-	
+	//gets x coordinate of the character
 	public int getX()
 	{
 		return x;
 	}
+	
+	//draws the player
 	public void drawStatic(Graphics g, boolean isLeft)
 	{
 		//int x;
@@ -77,21 +83,13 @@ public class Character { ///throughout this need to replace magic numbers with v
 	}
 	
 
-	
+	//changes the value of x
 	public void update()//trying to make the box move by calling this from BattlePane, couldnt get it to work
 	{
 		x +=5;
 		
 	}
 	
-	private class animationListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			  //x += 1;
-		    //  targetPanel.repaint();	
-		}
-		
-	}
+
 	
 }
