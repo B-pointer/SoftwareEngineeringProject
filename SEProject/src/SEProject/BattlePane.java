@@ -9,6 +9,7 @@ import javax.swing.*;
 public class BattlePane extends JPanel{
 	
 	private final int BUTTON_PANEL_HEIGHT= 100;// height of button panel added to the bottom of the panel
+	private final int BUTTON_WIDTH;
 	//instance fields 
 	private JPanel buttonPanel;  
 	private boolean isPlayer1Turn;
@@ -22,11 +23,13 @@ public class BattlePane extends JPanel{
 	//parameterized constructor takes mainFrame as argument
 	public BattlePane(mainFrame maFrame)//add player class
 	{
+		BUTTON_WIDTH = (mainFrame.FRAME_WIDTH/3)-20;
 		mFrame = maFrame;
 		setLayout(null);
 		addButtons();
 		mFrame.add(this);
 		a =  new Character(this);
+
 	}
 	
 	
@@ -34,19 +37,29 @@ public class BattlePane extends JPanel{
 	private void addButtons()
 	{
 		buttonPanel = new JPanel();
-		buttonPanel.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT ));
+		//buttonPanel.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT ));
 		
 		attackButton = new JButton("Attack");
+		attackButton.setBackground(new Color(123, 123, 231));
+		attackButton.setPreferredSize(new Dimension(BUTTON_WIDTH, (int)(BUTTON_PANEL_HEIGHT/2)));
+		attackButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		attackButton.addActionListener(new AttackListener());
 		
 		healButton = new JButton("Heal");
+		healButton.setBackground(new Color(123, 123, 231));
+		healButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		healButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
+		
 		healButton.addActionListener(new HealListener());
 		
 		chargeButton = new JButton("Charge");
+		chargeButton.setBackground(new Color(123, 123, 231));
+		chargeButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		chargeButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
 		chargeButton.addActionListener(new ChargeListener());
 		
 		buttonPanel.setBackground(new Color(213, 45, 216));
-		buttonPanel.setBounds(0, 402, 640, 50);
+		buttonPanel.setBounds(0, mainFrame.FRAME_HEIGHT - BUTTON_PANEL_HEIGHT-29, mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT);
 		
 		buttonPanel.add(attackButton);
 		buttonPanel.add(healButton);
