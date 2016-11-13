@@ -84,7 +84,6 @@ public class BattlePane extends JPanel{
 			System.out.println("Attack");
 			a.dealDamage(30);
 			repaint();
-		
 		}	
 	}
 	//listener for Heal Button
@@ -95,7 +94,6 @@ public class BattlePane extends JPanel{
 			System.out.println("Heal");		
 		}	
 	}
-	
 	//listener for charge button
 	private class ChargeListener implements ActionListener
 	{

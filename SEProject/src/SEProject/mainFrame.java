@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class mainFrame extends JFrame {
 
-	public static final int FRAME_WIDTH = 640;
-	public static final int FRAME_HEIGHT = 480;
+	public static final int FRAME_WIDTH = 1200;
+	public static final int FRAME_HEIGHT = 900;
 	
 	public mainFrame()/////ADDD A CONTROLLER INSTEAD OF MAKING THIS DO ALL THE PROCESSING, HAVE THIS CLASS SIMPLY BE THE FRAME?
 	{

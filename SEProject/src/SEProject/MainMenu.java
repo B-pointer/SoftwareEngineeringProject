@@ -30,6 +30,8 @@ public class MainMenu extends JPanel{
 		
 		CharInfoButton = new JButton("Character Info");
 		CharInfoButton.setSize(buttonLength, buttonHeight);
+		
+		
 		CharInfoButton.addActionListener(new CharInfoListener());
 		add(CharInfoButton);
 		
