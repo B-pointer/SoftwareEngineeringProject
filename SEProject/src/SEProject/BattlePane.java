@@ -8,9 +8,9 @@ import javax.swing.*;
 
 public class BattlePane extends JPanel{
 	
-	private final int BUTTON_PANEL_HEIGHT= 100;
-	
-	private JPanel buttonPanel;
+	private final int BUTTON_PANEL_HEIGHT= 100;// height of button panel added to the bottom of the panel
+	//instance fields 
+	private JPanel buttonPanel;  
 	private boolean isPlayer1Turn;
 	private JButton attackButton;
 	private JButton chargeButton;
@@ -19,7 +19,7 @@ public class BattlePane extends JPanel{
 	
 	Character a;
 	
-	
+	//parameterized constructor takes mainFrame as argument
 	public BattlePane(mainFrame maFrame)//add player class
 	{
 		mFrame = maFrame;
@@ -30,7 +30,7 @@ public class BattlePane extends JPanel{
 	}
 	
 	
-	
+	//adds buttons to button panel and then adds the button panel to the main panel
 	private void addButtons()
 	{
 		buttonPanel = new JPanel();
@@ -55,6 +55,8 @@ public class BattlePane extends JPanel{
 
 	}
 	
+	
+	//called by paintComponent, draws the health bars of the players based on their current and max health
 	public void drawHealthBars(Graphics g)
 	{
 		double aRatio = ((double)a.getCurrentHealth())/a.getMaxHealth();
@@ -65,7 +67,7 @@ public class BattlePane extends JPanel{
 	}
 
 	
-	
+	//override of paintComponent, calls drawMethod for characters
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -74,7 +76,7 @@ public class BattlePane extends JPanel{
 		
 	}
 	
-	
+	//listener for attack button
 	private class AttackListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -85,7 +87,7 @@ public class BattlePane extends JPanel{
 		
 		}	
 	}
-	
+	//listener for Heal Button
 	private class HealListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -94,7 +96,7 @@ public class BattlePane extends JPanel{
 		}	
 	}
 	
-	
+	//listener for charge button
 	private class ChargeListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
