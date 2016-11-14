@@ -30,6 +30,8 @@ public class Character { ///throughout this need to replace magic numbers with v
 	private int attackPower;
 	private int defense;
 	
+	private final int POTION_HEAL_AMOUNT =85;
+	private int potionCount;
 	
 	BattlePane targetPanel;//may not be necessary, probably will be though for drawing images from files
 	
@@ -38,7 +40,9 @@ public class Character { ///throughout this need to replace magic numbers with v
 	{
 		targetPanel = bp;
 		maxHealth= 400;
-		currentHealth= 300;
+		currentHealth= maxHealth;
+		
+		potionCount = 3;
 	}
 	
 	
@@ -55,10 +59,24 @@ public class Character { ///throughout this need to replace magic numbers with v
 		
 	}
 	
+	
+	public int getPotionCount()
+	{
+		return potionCount;
+	}
+	
 	//deals damage, called by other palyer class in the battle
 	public void dealDamage(int damage)
 	{
 		currentHealth -= damage;
+		
+	}
+	
+	
+	public void heal()
+	{
+		currentHealth += POTION_HEAL_AMOUNT;
+		potionCount --;
 		
 	}
 	//gets x coordinate of the character

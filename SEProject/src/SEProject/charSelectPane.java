@@ -116,6 +116,7 @@ public class charSelectPane extends JPanel {
 		start.setBackground(Color.darkGray);
 		start.setForeground(Color.LIGHT_GRAY);
 		start.setFont(new Font("Arial", Font.PLAIN, 45));
+		start.setBorder(BorderFactory.createRaisedBevelBorder());
 		start.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, 70));
 		add(start, BorderLayout.SOUTH);
 		//repaint();

@@ -45,7 +45,7 @@ public class BattlePane extends JPanel{
 		attackButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		attackButton.addActionListener(new AttackListener());
 		
-		healButton = new JButton("Heal");
+		healButton = new JButton("Heal(3)");
 		healButton.setBackground(new Color(123, 123, 231));
 		healButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		healButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
@@ -89,6 +89,13 @@ public class BattlePane extends JPanel{
 		
 	}
 	
+	public void updateGUI()//needs to be called by another method instead of the heal listener class, but first need to implement turns
+	{
+		healButton.setText("Heal(" + a.getPotionCount() + ")");
+		if(a.getPotionCount() < 1)
+			healButton.setEnabled(false);
+	}
+	
 	//listener for attack button
 	private class AttackListener implements ActionListener
 	{
@@ -104,7 +111,10 @@ public class BattlePane extends JPanel{
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			System.out.println("Heal");		
+			System.out.println("Heal");	
+			a.heal();
+			updateGUI();
+			repaint();
 		}	
 	}
 	//listener for charge button
