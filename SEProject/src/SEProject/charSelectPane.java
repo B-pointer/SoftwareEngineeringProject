@@ -111,6 +111,13 @@ public class charSelectPane extends JPanel {
 		add(vs, BorderLayout.CENTER);
 		add(right, BorderLayout.EAST);
 		
+		JButton start = new JButton("Start");
+		start.addActionListener(new StartListener());
+		start.setBackground(Color.darkGray);
+		start.setForeground(Color.LIGHT_GRAY);
+		start.setFont(new Font("Arial", Font.PLAIN, 45));
+		start.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, 70));
+		add(start, BorderLayout.SOUTH);
 		//repaint();
 
 	}
@@ -125,6 +132,13 @@ public class charSelectPane extends JPanel {
 			sourceButton.setVisible(false);
 			assignNextCharacter(Integer.parseInt(source));//this will be used to set the character the player chooses 
 			checkIfComplete();
+		}
+	}
+	private class StartListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			mFrame.setBattlePane();
 		}
 	}
 }
