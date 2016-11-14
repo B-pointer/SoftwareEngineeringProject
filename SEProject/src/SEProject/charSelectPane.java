@@ -7,6 +7,7 @@ public class charSelectPane extends JPanel {
 	
 	mainFrame mFrame;
 	ArrayList<ImageIcon> imageList;
+	ArrayList<JButton> buttonList;
 	private final int NUMBER_BUTTONS =4;
 	private int selectionCount;
 	public charSelectPane(mainFrame frame)
@@ -14,6 +15,8 @@ public class charSelectPane extends JPanel {
 		mFrame = frame;
 		setBackground(Color.MAGENTA);
 		
+
+		buttonList = new ArrayList<JButton>();
 		
 		selectionCount = 0;
 		getImages();
@@ -45,6 +48,7 @@ public class charSelectPane extends JPanel {
 			aButton.setBorder(BorderFactory.createEmptyBorder());
 			aButton.setContentAreaFilled(false);
 			aButton.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH/4-20, mainFrame.FRAME_HEIGHT));
+			buttonList.add(aButton);
 			add(aButton);
 		}
 	}
@@ -58,8 +62,45 @@ public class charSelectPane extends JPanel {
 	{
 		if(selectionCount > 1)
 		{
-			mFrame.setBattlePane();	//maybe make this sleep here or add a button or something prompting the player
+			addVersusScreen();
+			/*
+			try{
+				Thread.sleep(2000);
+			}
+			catch(InterruptedException e)
+			{
+				System.out.println("Error Here");
+			}
+			*/
+			//mFrame.setBattlePane();	//maybe make this sleep here or add a button or something prompting the player
 		}
+	}
+	
+	public void addVersusScreen()
+	{
+		for(JButton a: buttonList)
+		{
+			a.setVisible(false);
+		}
+		
+		setBackground(Color.gray);
+		JButton left  = new JButton();
+		left.setBorder(BorderFactory.createEmptyBorder());
+		left.setIcon(imageList.get(1));/////bleh
+		JButton right =  new JButton(imageList.get(1));
+		right.setBorder(BorderFactory.createEmptyBorder());
+		JLabel vs = new JLabel("Versus");
+		vs.setFont(new Font("Arial", 70, 70));
+		
+		add(left);
+		add(vs);
+		add(right);
+		
+		repaint();
+		
+		
+		
+		
 	}
 	
 	private class SelectListener implements ActionListener
