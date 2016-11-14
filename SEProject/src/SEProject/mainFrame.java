@@ -60,7 +60,7 @@ public class mainFrame extends JFrame {
 		
 
 		CharacterInfoPane infoPane = new CharacterInfoPane(this);
-		infoPane.setPreferredSize(new Dimension (640, 2000));
+		//infoPane.setPreferredSize(new Dimension (640, 2000));
 		
 		JScrollPane scroller = new JScrollPane(infoPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroller.getVerticalScrollBar().setUnitIncrement(16); //this makes the scroll faster than default
@@ -68,7 +68,15 @@ public class mainFrame extends JFrame {
 		getContentPane().add(scroller);
 		getContentPane().revalidate();
 	}
-	
+	//sets character select pane
+	public void setCharSelectPane()
+	{
+		getContentPane().removeAll();
+		getContentPane().invalidate();
+		getContentPane().add(new charSelectPane(this));
+		getContentPane().revalidate();
+
+	}
 	
 	//sets the panel to a battle pane
 	public void setBattlePane()

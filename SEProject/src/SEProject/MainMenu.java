@@ -48,8 +48,8 @@ public class MainMenu extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Start Battle");
-			mFrame.setBattlePane();
-
+			//mFrame.setBattlePane();
+			mFrame.setCharSelectPane();
 		}
 	}
 	
