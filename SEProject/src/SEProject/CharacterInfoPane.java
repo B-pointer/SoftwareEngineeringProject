@@ -8,7 +8,7 @@ import javax.swing.*;
 public class CharacterInfoPane extends JPanel{
 	
 	mainFrame mFrame;
-	//JScrollPane scrollPanel;
+	private final int BUTTON_PANEL_HEIGHT=50;
 	
 	Image terryImg; //this was used to hold a picture for testing, but name can be changed. We will need 4 images (one for each class/character)
 	
@@ -24,7 +24,7 @@ public class CharacterInfoPane extends JPanel{
 		setBackground(Color.ORANGE);
 		this.mFrame = maFrame;
 		
-		addButtonPanel();
+		addButton();
 		
 		ImageIcon ii = new ImageIcon("characterInfoImages/terryCrews.jpg");
 	    terryImg = ii.getImage(); 
@@ -32,11 +32,11 @@ public class CharacterInfoPane extends JPanel{
 	
 	
 	//adds buttons to button panel and then adds the button panel to the main panel
-	private void addButtonPanel()
+	private void addButton()
 	{
 		JPanel buttonPanel = new JPanel();
 		
-		buttonPanel.setPreferredSize(new Dimension(100, 300));
+	//	buttonPanel.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, 200));
 		
 		JButton BackButton = new JButton("Back to Main Menu");
 		BackButton.setSize(100, 40);
@@ -45,7 +45,7 @@ public class CharacterInfoPane extends JPanel{
 		
 		buttonPanel.setBackground(new Color(213, 45, 216));//sets the color of the panel behind the button, should be less obnoxious than current color
 		
-		buttonPanel.setBounds(170, 10, 300, 37);//location and size of button, use some named variables instead of magic numbers
+		buttonPanel.setBounds(0, 0, mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT);//location and size of button, use some named variables instead of magic numbers
 		
 		
 		add(buttonPanel);
@@ -60,7 +60,7 @@ public class CharacterInfoPane extends JPanel{
 		//g.drawRect(50, 100, 400, 400);
 		g.drawImage(terryImg, 50, 50, this); //this drew the picture, which needs to be updated
 		g.drawString("Sample Text and stuff", 50, 500); //using drawString since adding a JTextArea or something similar sets the defualt position of the scrollbar to weird places
-		
+		g.drawImage(terryImg, 1153, 50, -397, 396, this);
 	}
 	
 	
