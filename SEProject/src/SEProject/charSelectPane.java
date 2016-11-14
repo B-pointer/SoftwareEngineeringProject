@@ -68,6 +68,18 @@ public class charSelectPane extends JPanel {
 		
 	}
 	
+	private String getStringNameExample(int x)
+	{
+		switch(x){
+			case 0: return "Jimmy";
+			case 1: return "Paul";
+			case 2: return "John";
+			case 3: return "Charlie";
+			default: return "error";
+		}
+		
+	}
+	
 	public void checkIfComplete() 
 	{
 		if(selectionCount > 1)
@@ -86,7 +98,7 @@ public class charSelectPane extends JPanel {
 		}
 	}
 	
-	public void addVersusScreen()//example code, should be changed to something else, posibly not using buttons as pictures
+	public void addVersusScreen()//example code, should be changed to something else, possibly not using buttons as pictures
 	{
 		for(JButton a: buttonList)
 		{
@@ -103,8 +115,8 @@ public class charSelectPane extends JPanel {
 		right.setBorder(BorderFactory.createEmptyBorder());
 		right.setContentAreaFilled(false);
 		right.setFocusable(false);
-		JLabel vs = new JLabel("    " + firstCharacterID + "   VERSUS   "+ secondCharacterID);
-		vs.setFont(new Font("Arial", 70, 70));
+		JLabel vs = new JLabel("              "+ getStringNameExample(firstCharacterID) + "   VS   "+ getStringNameExample(secondCharacterID));
+		vs.setFont(new Font("Arial", Font.PLAIN, 50));
 		
 		setLayout(new BorderLayout());
 		add(left, BorderLayout.WEST);
