@@ -5,7 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-
 public class BattlePane extends JPanel{
 	
 	private final int BUTTON_PANEL_HEIGHT= 100;// height of button panel added to the bottom of the panel
@@ -17,7 +16,6 @@ public class BattlePane extends JPanel{
 	private JButton chargeButton;
 	private JButton healButton;
 	mainFrame mFrame;
-	
 	Character a;
 	
 	//parameterized constructor takes mainFrame as argument
@@ -31,8 +29,7 @@ public class BattlePane extends JPanel{
 		a =  new Character(this);
 
 	}
-	
-	
+
 	//adds buttons to button panel and then adds the button panel to the main panel
 	private void addButtons()
 	{
@@ -67,8 +64,6 @@ public class BattlePane extends JPanel{
 		add(buttonPanel);
 
 	}
-	
-	
 	//called by paintComponent, draws the health bars of the players based on their current and max health
 	public void drawHealthBars(Graphics g)
 	{
@@ -88,7 +83,7 @@ public class BattlePane extends JPanel{
 		drawHealthBars(g);
 		
 	}
-	
+	//updates the buttons (and likely will update the status message should we add one)
 	public void updateGUI()//needs to be called by another method instead of the heal listener class, but first need to implement turns
 	{
 		healButton.setText("Heal(" + a.getPotionCount() + ")");
