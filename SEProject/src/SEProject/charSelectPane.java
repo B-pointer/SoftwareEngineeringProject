@@ -13,11 +13,22 @@ public class charSelectPane extends JPanel {
 		mFrame = frame;
 		setBackground(Color.MAGENTA);
 		
-		//getImages();
+		
+		getImages();
 		addButtons();
 		
 		setVisible(true);
 		
+	}
+	
+	private void getImages()
+	{
+		imageList = new ArrayList<ImageIcon>();
+		for(int i=0; i < NUMBER_BUTTONS; i++)
+		{
+			ImageIcon ii = new ImageIcon("charSelectImages/Example.png");
+			imageList.add(ii);
+		}
 	}
 	
 	private void addButtons()
@@ -27,10 +38,10 @@ public class charSelectPane extends JPanel {
 			JButton aButton = new JButton();
 			aButton.addActionListener(new SelectListener());
 			aButton.setActionCommand(String.valueOf(i));
-			aButton.setText("Button " + i);
-			//aButton.setIcon(imageList.get(i));
-			//aButton.setBorder(BorderFactory.createEmptyBorder());
-			//aButton.setContentAreaFilled(false);
+			//aButton.setText("Button " + i);
+			aButton.setIcon(imageList.get(i));
+			aButton.setBorder(BorderFactory.createEmptyBorder());
+			aButton.setContentAreaFilled(false);
 			aButton.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH/4-20, mainFrame.FRAME_HEIGHT));
 			add(aButton);
 		}
