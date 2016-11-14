@@ -67,8 +67,6 @@ public class mainFrame extends JFrame {
 		
 		getContentPane().add(scroller);
 		getContentPane().revalidate();
-		
-		
 	}
 	
 	
