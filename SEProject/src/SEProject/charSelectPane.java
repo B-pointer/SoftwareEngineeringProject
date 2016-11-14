@@ -10,12 +10,18 @@ public class charSelectPane extends JPanel {
 	ArrayList<JButton> buttonList;
 	private final int NUMBER_BUTTONS =4;
 	private int selectionCount;
+	private int firstCharacterID;
+	private int secondCharacterID;
+	
 	public charSelectPane(mainFrame frame)
 	{
 		mFrame = frame;
 		setBackground(Color.MAGENTA);
 		
-
+		
+		firstCharacterID=-1;
+		secondCharacterID=-1;
+		
 		buttonList = new ArrayList<JButton>();
 		
 		selectionCount = 0;
@@ -48,15 +54,19 @@ public class charSelectPane extends JPanel {
 			aButton.setBorder(BorderFactory.createEmptyBorder());
 			aButton.setContentAreaFilled(false);
 			aButton.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH/4-20, mainFrame.FRAME_HEIGHT));
+			aButton.setFocusable(false);
 			buttonList.add(aButton);
 			add(aButton);
 		}
 	}
-	//private void assignNextChar(int charID)
-	//{
+	private void assignNextCharacter(int charID)
+	{
+		if(firstCharacterID < 0)
+			firstCharacterID = charID;
+		else
+			secondCharacterID = charID;
 		
-		
-	//}
+	}
 	
 	public void checkIfComplete() 
 	{
@@ -76,7 +86,7 @@ public class charSelectPane extends JPanel {
 		}
 	}
 	
-	public void addVersusScreen()
+	public void addVersusScreen()//example code, should be changed to something else, posibly not using buttons as pictures
 	{
 		for(JButton a: buttonList)
 		{
@@ -87,20 +97,22 @@ public class charSelectPane extends JPanel {
 		JButton left  = new JButton();
 		left.setBorder(BorderFactory.createEmptyBorder());
 		left.setIcon(imageList.get(1));/////bleh
+		left.setContentAreaFilled(false);
+		left.setFocusable(false);
 		JButton right =  new JButton(imageList.get(1));
 		right.setBorder(BorderFactory.createEmptyBorder());
-		JLabel vs = new JLabel("Versus");
+		right.setContentAreaFilled(false);
+		right.setFocusable(false);
+		JLabel vs = new JLabel("    " + firstCharacterID + "   VERSUS   "+ secondCharacterID);
 		vs.setFont(new Font("Arial", 70, 70));
 		
-		add(left);
-		add(vs);
-		add(right);
+		setLayout(new BorderLayout());
+		add(left, BorderLayout.WEST);
+		add(vs, BorderLayout.CENTER);
+		add(right, BorderLayout.EAST);
 		
-		repaint();
-		
-		
-		
-		
+		//repaint();
+
 	}
 	
 	private class SelectListener implements ActionListener
@@ -111,7 +123,7 @@ public class charSelectPane extends JPanel {
 			String source = e.getActionCommand();
 			JButton sourceButton = (JButton)e.getSource();
 			sourceButton.setVisible(false);
-			//assignNextCharacter(source.parseInt)//this will be used to set the character the player chooses 
+			assignNextCharacter(Integer.parseInt(source));//this will be used to set the character the player chooses 
 			checkIfComplete();
 		}
 	}
