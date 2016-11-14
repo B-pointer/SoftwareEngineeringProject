@@ -20,9 +20,15 @@ public class MainMenu extends JPanel{
 		
 		this.mFrame = maFrame;
 		
-		// ImageIcon ii = new ImageIcon("terryCrews.jpg");
-	    // terry = ii.getImage();
+		addButtons();
 		
+		setBackground(Color.GREEN);
+		
+		mFrame.add(this);
+	}
+	
+	public void addButtons()
+	{
 		StartButton = new JButton("Start Battle");
 		StartButton.setSize(buttonLength, buttonHeight);
 		StartButton.addActionListener(new StartListener());
@@ -35,13 +41,8 @@ public class MainMenu extends JPanel{
 		CharInfoButton.addActionListener(new CharInfoListener());
 		add(CharInfoButton);
 		
-		
-		
-		setBackground(Color.GREEN);
-		
-		mFrame.add(this);
 	}
-	
+
 	//Listener class for the start button, sets the active panel in the main frame to battle pane, needs to be updated so that it instead navigates to the character select screen
 	private class StartListener implements ActionListener
 	{
