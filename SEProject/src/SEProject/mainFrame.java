@@ -41,6 +41,7 @@ public class mainFrame extends JFrame {
 		
 	}
 	
+	
 	//sets active panel to new MainMenu
 	public void setMainMenu()
 	{
