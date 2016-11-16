@@ -41,6 +41,27 @@ public class BattlePane extends JPanel{
 		otherCharacter = Player2;
 	}
 
+	//resets buttons for next turn
+	public void nextTurn()
+	{
+		swapCurrent();
+		updateGUI();
+		enableButtons();
+		repaint();
+	}
+	//switch buttons on and off
+	public void disableButtons()
+	{
+		attackButton.setEnabled(false);
+		healButton.setEnabled(false);
+		chargeButton.setEnabled(false);
+	}
+	public void enableButtons()
+	{
+		attackButton.setEnabled(true);
+		healButton.setEnabled(true);
+		chargeButton.setEnabled(true);
+	}
 	//swaps the current player and other player
 	public void swapCurrent()
 	   {
@@ -107,7 +128,7 @@ public class BattlePane extends JPanel{
 
 	private void performAttack()
 	{
-		attackButton.setEnabled(false);//need to disable all buttons
+		disableButtons();//need to disable all buttons
 		Timer t = new Timer(DELAY, new animationListener());
 		t.start();
 		
@@ -120,6 +141,16 @@ public class BattlePane extends JPanel{
 		drawHealthBars(g);
 		otherCharacter.drawMe(g);
 		currentCharacter.drawMe(g);
+		if(currentCharacter.equals(Player1))
+		{
+			g.setColor(Color.GREEN);
+			g.drawLine(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150);
+		}
+		else
+		{
+			g.setColor(Color.GREEN);
+			g.drawLine(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , mainFrame.FRAME_HEIGHT-150);
+		}
 		
 	}
 	//updates the buttons (and likely will update the status message should we add one)
@@ -148,8 +179,7 @@ public class BattlePane extends JPanel{
 		{
 			System.out.println("Heal");	
 			currentCharacter.heal();
-			updateGUI();
-			repaint();
+			nextTurn();
 		}	
 	}
 	//listener for charge button
@@ -159,7 +189,7 @@ public class BattlePane extends JPanel{
 		{
 			System.out.println("Charge");
 			currentCharacter.charge();
-			repaint();
+			nextTurn();
 		}	
 	}
 	
@@ -172,14 +202,16 @@ public class BattlePane extends JPanel{
 			{
 				((Timer)e.getSource()).stop();
 				System.out.println("reached end condition");
-				attackButton.setEnabled(true);//change to all buttons, or make switch turn method
+				//attackButton.setEnabled(true);//change to all buttons, or make switch turn method
 				currentCharacter.reset();
-				swapCurrent();//change to switch turn method as mentioned above
-				repaint();
-				return;
+				nextTurn();
+
 			}
-			currentCharacter.attackUpdate();
-			repaint();
+			else
+			{
+				currentCharacter.attackUpdate();
+				repaint();
+			}
 		}
 	}
 	
