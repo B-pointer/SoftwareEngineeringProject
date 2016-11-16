@@ -17,6 +17,11 @@ public class BattlePane extends JPanel{
 	private JButton healButton;
 	mainFrame mFrame;
 	Character a;
+	//private final Character Player1;
+	//private final Character Player2;
+	
+	//private Character currentCharacter;
+	//private Character otherCharacter;
 	
 	//parameterized constructor takes mainFrame as argument
 	public BattlePane(mainFrame maFrame)//add player class
@@ -120,6 +125,15 @@ public class BattlePane extends JPanel{
 			System.out.println("Charge");
 		}	
 	}
-
-
+	/*
+	//listener for animation timer 
+	private class animationListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			if(currentCharacter.getFrameCount() > currentCharacter.getNumberTotalFrames())
+				((Timer)e.getSource()).stop();
+		}
+	}
+	*/
 }
