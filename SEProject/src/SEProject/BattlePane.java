@@ -84,7 +84,7 @@ public class BattlePane extends JPanel{
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		a.drawStatic(g, true);
+		a.drawMe(g, true);
 		drawHealthBars(g);
 		
 	}

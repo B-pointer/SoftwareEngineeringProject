@@ -19,7 +19,8 @@ import javax.swing.Timer;
 
 public class Character { ///throughout this need to replace magic numbers with variables for easier changing
 	
-	private Image characterImage;
+	private Image[] ImageList;
+	private Image currentImage;
 	//more stats and things go here
 	
 	private int currentHealth;
@@ -86,7 +87,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	}
 	
 	//draws the player
-	public void drawStatic(Graphics g, boolean isLeft)
+	public void drawMe(Graphics g, boolean isLeft)
 	{
 		//int x;
 		int y = 100;
