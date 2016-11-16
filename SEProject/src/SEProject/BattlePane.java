@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class BattlePane extends JPanel{
 	
+	
 	private final int BUTTON_PANEL_HEIGHT= 100;// height of button panel added to the bottom of the panel
 	private final int BUTTON_WIDTH;
 	//instance fields 
@@ -157,6 +158,8 @@ public class BattlePane extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Charge");
+			currentCharacter.charge();
+			repaint();
 		}	
 	}
 	

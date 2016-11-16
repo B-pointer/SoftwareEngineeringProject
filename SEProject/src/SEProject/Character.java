@@ -25,7 +25,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	private int currentImageIndex;
 	private int FrameCount;
 	private int TotalFrames;
-	//size of image info, dependant on images
+	//size of image info, dependent on images
 	private int width = 219;
 	private int height = 353;
 	
@@ -36,6 +36,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	private int y;
 	private int attackPower;
 	private int defense;
+	private boolean isCharged;
 	
 	private boolean isRightPlayer;//if this character is on the right side of the screen (controlled by player 2), set to true
 	
@@ -62,8 +63,9 @@ public class Character { ///throughout this need to replace magic numbers with v
 		potionCount = 3;
 		loadImages();
 		FrameCount = 0;
-		TotalFrames = 20;
+		TotalFrames = 50;
 		currentImageIndex = 0;
+		isCharged = false;
 	}
 	//gets the images and stores them in array
 	private void loadImages()
@@ -104,6 +106,12 @@ public class Character { ///throughout this need to replace magic numbers with v
 		return potionCount;
 	}
 	
+	public void charge()
+	{
+		isCharged = true;
+		//code goes here for increasing the rate of success
+	}
+	
 	//deals damage, called by other player class in the battle
 	public void dealDamage(int damage)
 	{
@@ -113,26 +121,27 @@ public class Character { ///throughout this need to replace magic numbers with v
 	//changes value of x and will change the current picture index
 	public void attackUpdate()
 	{
-		  FrameCount ++; //might need to change where this is in the method
+		  
 		  System.out.println(FrameCount);
-		  if(FrameCount % 5 == 0)//magic number here
-			  nextImage();
+		 // if(FrameCount % 10 == 0 && FrameCount/10 < NUM_IMG)//magic number here
+		  if(FrameCount == 11 || FrameCount == 27 || FrameCount == 33 || FrameCount == 42 )  
+				nextImage();
 		  if(isRightPlayer)
 	      {
-	         if(FrameCount < 8)
-	          x -= 100; //looks good at 25 with id condition at 10
+	         if(FrameCount < 30)
+	          x -= 30; //looks good at 25 with id condition at 10
 	         else 
-	          x+= 50; 
+	          x+= 30; 
 	      }
 	      else
 	      {
-	         if(FrameCount < 8)
+	         if(FrameCount < 30)
 	          x += 30; //looks good at 25 with id condition at 10
 	          else 
-	             x -= 16; 
+	             x -= 30; 
 	      } 
 		 
-		
+		  FrameCount ++; //might need to change where this is in the method
 	}
 	
 	//returns number of frames completed in current animation
@@ -147,6 +156,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 		return TotalFrames;
 	}
 	
+
 	
 	public void reset()
 	{
@@ -185,12 +195,20 @@ public class Character { ///throughout this need to replace magic numbers with v
 		*/
 		if(isRightPlayer)
 	      {
-	         g.setColor(Color.red);
-	         g.fillRect(x, y+150, 100, 100);
+	         if(isCharged)
+	         {
+	        	 g.setColor(new Color(255, 255, 0, 31));
+	        	 g.fillRect(x, y, width, height);
+	        }
 	         g.drawImage(ImageList[currentImageIndex], x+width, y,-width, height, targetPanel);
 	      }
 	      else
 	      {
+	    	  if(isCharged)
+		         {
+		        	 g.setColor(new Color(255, 255, 0, 31));
+		        	 g.fillRect(x, y, width, height);
+		        }
 	    	  ImageIcon ii = new ImageIcon("characterImages/Man0001.png");
 	    	  g.drawImage(ImageList[currentImageIndex], x, y, targetPanel);
 	      }
