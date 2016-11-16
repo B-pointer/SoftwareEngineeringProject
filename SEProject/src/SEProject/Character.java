@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -37,6 +39,8 @@ public class Character { ///throughout this need to replace magic numbers with v
 	private int attackPower;
 	private int defense;
 	private boolean isCharged;
+	
+	private int rateOfSuccess;
 	
 	private boolean isRightPlayer;//if this character is on the right side of the screen (controlled by player 2), set to true
 	
@@ -66,6 +70,8 @@ public class Character { ///throughout this need to replace magic numbers with v
 		TotalFrames = 50;
 		currentImageIndex = 0;
 		isCharged = false;
+		rateOfSuccess = 70;
+		attackPower = 75;
 	}
 	//gets the images and stores them in array
 	private void loadImages()
@@ -100,6 +106,22 @@ public class Character { ///throughout this need to replace magic numbers with v
 		
 	}
 	
+	public void attack(Character a)
+	{
+		Random x = new Random();
+		int z = x.nextInt(100);
+		System.out.println(z);
+		if(z < rateOfSuccess)
+		{
+			double ratio = (x.nextInt(50) + 50)/100.0;
+			System.out.println(ratio);
+			int dmg = (int)(ratio*attackPower);
+			System.out.println("dmg = " + dmg);
+			a.dealDamage(dmg);
+		}
+		
+		//a.dealDamage(50);
+	}
 	
 	public int getPotionCount()
 	{
@@ -122,7 +144,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	public void attackUpdate()
 	{
 		  
-		  System.out.println(FrameCount);
+		//  System.out.println(FrameCount);
 		 // if(FrameCount % 10 == 0 && FrameCount/10 < NUM_IMG)//magic number here
 		  if(FrameCount == 11 || FrameCount == 27 || FrameCount == 33 || FrameCount == 42 )  
 				nextImage();

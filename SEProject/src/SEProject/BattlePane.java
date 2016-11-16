@@ -25,7 +25,7 @@ public class BattlePane extends JPanel{
 	private Character otherCharacter;
 	
 	
-	private final int DELAY = 100;
+	private final int DELAY = 30;
 	//parameterized constructor takes mainFrame as argument
 	public BattlePane(mainFrame maFrame)//add player class
 	{
@@ -203,6 +203,7 @@ public class BattlePane extends JPanel{
 				((Timer)e.getSource()).stop();
 				System.out.println("reached end condition");
 				//attackButton.setEnabled(true);//change to all buttons, or make switch turn method
+				currentCharacter.attack(otherCharacter);//move this elsewhere???
 				currentCharacter.reset();
 				nextTurn();
 
