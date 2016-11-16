@@ -27,7 +27,8 @@ public class CharacterInfoPane extends JPanel{
 		addButton();
 		
 		ImageIcon ii = new ImageIcon("characterInfoImages/terryCrews.jpg");
-	    terryImg = ii.getImage(); 
+	   // ImageIcon ii = new ImageIcon("characterImages/Man0001.png");
+		terryImg = ii.getImage(); 
 	}
 	
 	

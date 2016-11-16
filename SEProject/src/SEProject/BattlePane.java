@@ -17,11 +17,11 @@ public class BattlePane extends JPanel{
 	private JButton healButton;
 	mainFrame mFrame;
 	Character a;
-	//private final Character Player1;
-	//private final Character Player2;
+	private final Character Player1;
+	private final Character Player2;
 	
-	//private Character currentCharacter;
-	//private Character otherCharacter;
+	private Character currentCharacter;
+	private Character otherCharacter;
 	
 	//parameterized constructor takes mainFrame as argument
 	public BattlePane(mainFrame maFrame)//add player class
@@ -31,7 +31,12 @@ public class BattlePane extends JPanel{
 		setLayout(null);
 		addButtons();
 		mFrame.add(this);
-		a =  new Character(this);
+		//a =  new Character(this);
+		Player1= new Character(this, false);
+		Player2 = new Character(this, true);
+		currentCharacter = Player1;
+		otherCharacter = Player2;
+		
 
 	}
 
@@ -72,11 +77,16 @@ public class BattlePane extends JPanel{
 	//called by paintComponent, draws the health bars of the players based on their current and max health
 	public void drawHealthBars(Graphics g)
 	{
-		double aRatio = ((double)a.getCurrentHealth())/a.getMaxHealth();
-		int fillAmount = ((int)(200*aRatio));
+		double char1Ratio = ((double)Player1.getCurrentHealth())/Player1.getMaxHealth();
+		double char2Ratio = ((double)Player2.getCurrentHealth())/Player1.getMaxHealth();
+		int fillAmount = ((int)(200*char1Ratio));
+		int fillAmount2 = ((int)(200*char2Ratio));
+		g.setColor(Color.RED);
 		g.fillRect(40, 40, fillAmount, 30);
+		g.fillRect(mainFrame.FRAME_WIDTH-250, 40, fillAmount2, 30);
 		g.setColor(Color.BLACK);
 		g.drawRect(40, 40, 200, 30);
+		g.drawRect(mainFrame.FRAME_WIDTH-250, 40, 200, 30);
 	}
 
 	
@@ -84,15 +94,17 @@ public class BattlePane extends JPanel{
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		a.drawMe(g, true);
+		//a.drawMe(g, true);
 		drawHealthBars(g);
+		otherCharacter.drawMe(g);
+		currentCharacter.drawMe(g);
 		
 	}
 	//updates the buttons (and likely will update the status message should we add one)
 	public void updateGUI()//needs to be called by another method instead of the heal listener class, but first need to implement turns
 	{
-		healButton.setText("Heal(" + a.getPotionCount() + ")");
-		if(a.getPotionCount() < 1)
+		healButton.setText("Heal(" + currentCharacter.getPotionCount() + ")");//change to currentPLayer
+		if(currentCharacter.getPotionCount() < 1)//change to currentPlayer
 			healButton.setEnabled(false);
 	}
 	
@@ -102,7 +114,7 @@ public class BattlePane extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Attack");
-			a.dealDamage(30);
+			Player1.dealDamage(30);//change to current Player
 			repaint();
 		}	
 	}
@@ -112,7 +124,7 @@ public class BattlePane extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Heal");	
-			a.heal();
+			currentCharacter.heal();
 			updateGUI();
 			repaint();
 		}	
