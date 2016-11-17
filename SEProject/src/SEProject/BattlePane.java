@@ -59,8 +59,10 @@ public class BattlePane extends JPanel{
 	public void enableButtons()
 	{
 		attackButton.setEnabled(true);
-		healButton.setEnabled(true);
+		
 		chargeButton.setEnabled(true);
+		if(currentCharacter.getPotionCount() > 0)
+		healButton.setEnabled(true);
 	}
 	//swaps the current player and other player
 	public void swapCurrent()

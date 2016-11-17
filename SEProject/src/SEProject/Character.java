@@ -3,50 +3,37 @@ package SEProject;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 
-
-public class Character { ///throughout this need to replace magic numbers with variables for easier changing
+public class Character extends AbstractCharacter{ ///throughout this need to replace magic numbers with variables for easier changing
 	//image array for animation frames
-	private final int NUM_IMG = 4;
-	private Image[] ImageList;
+	private final int NUM_IMG = 4;//
+	private Image[] ImageList;//
 	private Image currentImage;//may not be used in favor of current image index found immediately below
 	private int currentImageIndex;
-	private int FrameCount;
-	private int TotalFrames;
+	private int FrameCount;//
+	private int TotalFrames;//
 	//size of image info, dependent on images
-	private int width = 219;
-	private int height = 353;
+	private int width = 219;//
+	private int height = 353;//
 	
 	//more stats and things go here
-	private int currentHealth;
-	private int maxHealth;
-	private int x;
-	private int y;
+	private int currentHealth;//
+	private int maxHealth;//
+	private int x;//
+	private int y;//
 	private int attackPower;
 	private int defense;
-	private boolean isCharged;
+	private boolean isCharged;//
 	
-	private int rateOfSuccess;
+	private int rateOfSuccess;//
 	
 	private boolean isRightPlayer;//if this character is on the right side of the screen (controlled by player 2), set to true
 	
 
-	private final int POTION_HEAL_AMOUNT =85;
-	private int potionCount;
+	private final int POTION_HEAL_AMOUNT =85;//
+	private int potionCount;//
 	
 	BattlePane targetPanel;//may not be necessary, probably will be though for drawing images from files
 	
@@ -74,7 +61,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 		attackPower = 75;
 	}
 	//gets the images and stores them in array
-	private void loadImages()
+	private void loadImages()//
 	{
 		  ImageList = new Image[NUM_IMG];
 		  ImageIcon ii;
@@ -86,7 +73,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	      }
 	}
 	
-	private void nextImage()
+	private void nextImage()//
 	{
 		if(currentImageIndex > ImageList.length-2)
 			currentImageIndex =0;
@@ -94,19 +81,19 @@ public class Character { ///throughout this need to replace magic numbers with v
 			currentImageIndex ++;
 	}
 	//returns max health
-	public int getMaxHealth()
+	public int getMaxHealth()//
 	{
 		return maxHealth;
 	}
-	
+
 	//return currentHealth
-	public int getCurrentHealth()
+	public int getCurrentHealth()//
 	{
 		return currentHealth;
 		
 	}
-	
-	public void attack(Character a)
+
+	public void attack(Character a)//
 	{
 		Random x = new Random();
 		int z = x.nextInt(100);
@@ -122,24 +109,24 @@ public class Character { ///throughout this need to replace magic numbers with v
 		
 		//a.dealDamage(50);
 	}
-	
-	public int getPotionCount()
+
+	public int getPotionCount()//
 	{
 		return potionCount;
 	}
-	
-	public void charge()
+
+	public void charge()//
 	{
 		isCharged = true;
 		//code goes here for increasing the rate of success
 	}
-	
+
 	//deals damage, called by other player class in the battle
-	public void dealDamage(int damage)
+	public void dealDamage(int damage)//
 	{
 		currentHealth -= damage;	
 	}
-	
+
 	//changes value of x and will change the current picture index
 	public void attackUpdate()
 	{
@@ -165,22 +152,20 @@ public class Character { ///throughout this need to replace magic numbers with v
 		 
 		  FrameCount ++; //might need to change where this is in the method
 	}
-	
+
 	//returns number of frames completed in current animation
-	public int getFrameCount()
+	public int getFrameCount()//
 	{
 		return FrameCount;
 	}
-	
+
 	//return total number of frames in the animation
-	public int getTotalFrames()
+	public int getTotalFrames()//
 	{
 		return TotalFrames;
 	}
-	
 
-	
-	public void reset()
+	public void reset()//
 	{
 		if(isRightPlayer)
 	         x= mainFrame.FRAME_WIDTH-250;
@@ -189,22 +174,22 @@ public class Character { ///throughout this need to replace magic numbers with v
 	      currentImageIndex = 0;
 	      FrameCount = 0;
 	}
-	
+
 	//increases health and decreases number of potions
-	public void heal()
+	public void heal()//
 	{
 		currentHealth += POTION_HEAL_AMOUNT;
 		potionCount --;
 		
 	}
 	//gets x coordinate of the character
-	public int getX()
+	public int getX()//
 	{
 		return x;
 	}
 	
 	//draws the player
-	public void drawMe(Graphics g)//, boolean isLeft)
+	public void drawMe(Graphics g)//, boolean isLeft)//////
 	{
 		/*
 		int y = 100;
@@ -222,7 +207,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 	        	 g.setColor(new Color(255, 255, 0, 31));
 	        	 g.fillRect(x, y, width, height);
 	        }
-	         g.drawImage(ImageList[currentImageIndex], x+width, y,-width, height, targetPanel);
+	         g.drawImage(ImageList[currentImageIndex], x+width, y,-width, height,null );//targetPanel);
 	      }
 	      else
 	      {
@@ -232,7 +217,7 @@ public class Character { ///throughout this need to replace magic numbers with v
 		        	 g.fillRect(x, y, width, height);
 		        }
 	    	  ImageIcon ii = new ImageIcon("characterImages/Man0001.png");
-	    	  g.drawImage(ImageList[currentImageIndex], x, y, targetPanel);
+	    	  g.drawImage(ImageList[currentImageIndex], x, y,null);// targetPanel);
 	      }
 	}	
 }
