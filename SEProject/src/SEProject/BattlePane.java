@@ -16,6 +16,9 @@ public class BattlePane extends JPanel{
 	private JButton attackButton;
 	private JButton chargeButton;
 	private JButton healButton;
+	
+	//private String StatusLabel;
+	
 	mainFrame mFrame;
 	Character a;
 	private final Character Player1;
@@ -26,13 +29,17 @@ public class BattlePane extends JPanel{
 	
 	
 	private final int DELAY = 30;
-	//parameterized constructor takes mainFrame as argument
+	//parameterized constructor takes mainFrame as argument 
+	//this should be sorted into several other methods (i.e. resetPlayers so that matches can be more easily implemented)
 	public BattlePane(mainFrame maFrame)//add player class
 	{
 		BUTTON_WIDTH = (mainFrame.FRAME_WIDTH/3)-20;
 		mFrame = maFrame;
 		setLayout(null);
 		addButtons();
+		
+		//StatusLabel = "d;lksdjf;alkdjfal;k";
+		
 		mFrame.add(this);
 		//a =  new Character(this);
 		Player1= new Character(this, false);
@@ -118,14 +125,15 @@ public class BattlePane extends JPanel{
 	{
 		double char1Ratio = ((double)Player1.getCurrentHealth())/Player1.getMaxHealth();
 		double char2Ratio = ((double)Player2.getCurrentHealth())/Player1.getMaxHealth();
-		int fillAmount = ((int)(200*char1Ratio));
-		int fillAmount2 = ((int)(200*char2Ratio));
+		int fillAmount = ((int)(450*char1Ratio));
+		int fillAmount2 = ((int)(450*char2Ratio));
 		g.setColor(Color.RED);
 		g.fillRect(40, 40, fillAmount, 30);
-		g.fillRect(mainFrame.FRAME_WIDTH-250, 40, fillAmount2, 30);
+		g.fillRect(mainFrame.FRAME_WIDTH-(500-(450-fillAmount2)), 40, fillAmount2, 30);
+		//g.fillRect(mainFrame.FRAME_WIDTH-500, 40, fillAmount2, 30);
 		g.setColor(Color.BLACK);
-		g.drawRect(40, 40, 200, 30);
-		g.drawRect(mainFrame.FRAME_WIDTH-250, 40, 200, 30);
+		g.drawRect(40, 40, 450, 30);
+		g.drawRect(mainFrame.FRAME_WIDTH-500, 40, 450, 30);
 	}
 
 	private void performAttack()
@@ -140,18 +148,18 @@ public class BattlePane extends JPanel{
 	{
 		super.paintComponent(g);
 		//a.drawMe(g, true);
+		//g.drawString(StatusLabel, 400, 700);
 		drawHealthBars(g);
 		otherCharacter.drawMe(g);
 		currentCharacter.drawMe(g);
+		g.setColor(new Color(0, 255, 0, 80));
 		if(currentCharacter.equals(Player1))
 		{
-			g.setColor(Color.GREEN);
-			g.drawLine(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150);
+			g.fillRect(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, 15);//mainFrame.FRAME_HEIGHT-150);
 		}
 		else
 		{
-			g.setColor(Color.GREEN);
-			g.drawLine(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , mainFrame.FRAME_HEIGHT-150);
+			g.fillRect(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , 15);//mainFrame.FRAME_HEIGHT-150);
 		}
 		
 	}
