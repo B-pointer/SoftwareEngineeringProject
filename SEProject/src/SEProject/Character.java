@@ -23,15 +23,13 @@ public class Character extends AbstractCharacter{ ///throughout this need to rep
 	private int maxHealth;//
 	private int x;//
 	private int y;//
-	private int attackPower;
+	//private int attackPower;
 	private int defense;
 	private boolean isCharged;//
 	
-	private int rateOfSuccess;//
+	//private int rateOfSuccess;//
 	
 	private boolean isRightPlayer;//if this character is on the right side of the screen (controlled by player 2), set to true
-	
-
 	private final int POTION_HEAL_AMOUNT =85;//
 	private int potionCount;//
 	
@@ -57,8 +55,10 @@ public class Character extends AbstractCharacter{ ///throughout this need to rep
 		TotalFrames = 50;
 		currentImageIndex = 0;
 		isCharged = false;
-		rateOfSuccess = 70;
-		attackPower = 75;
+		//rateOfSuccess = 70;
+		setRateOfSuccess(70);
+		setAttack(75);
+		//attackPower = 75;
 	}
 	//gets the images and stores them in array
 	private void loadImages()//
@@ -92,7 +92,7 @@ public class Character extends AbstractCharacter{ ///throughout this need to rep
 		return currentHealth;
 		
 	}
-
+	/*
 	public void attack(Character a)//
 	{
 		Random x = new Random();
@@ -109,7 +109,7 @@ public class Character extends AbstractCharacter{ ///throughout this need to rep
 		
 		//a.dealDamage(50);
 	}
-
+*/
 	public int getPotionCount()//
 	{
 		return potionCount;
@@ -154,7 +154,7 @@ public class Character extends AbstractCharacter{ ///throughout this need to rep
 	}
 
 	//returns number of frames completed in current animation
-	public int getFrameCount()//
+	public int getFramesShown()//
 	{
 		return FrameCount;
 	}

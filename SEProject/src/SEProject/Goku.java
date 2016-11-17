@@ -13,6 +13,7 @@ public class Goku extends AbstractCharacter{
 		SetIsRightPlayer(isRight);
 		setStats();
 		loadImages("Goku");
+		setImageInfo();
 	}
 	public void setStats()
 	{
@@ -26,4 +27,10 @@ public class Goku extends AbstractCharacter{
 		setDefense(def);
 		setRateOfSuccess(ros);
 	}	
+	public void setImageInfo()
+	{
+		setCurrentIndex(0);
+		setImageWidth(500);
+		setImageHeight(500);//this will likely stretch the images a bit, but that can be worked out later
+	}
 }

@@ -21,11 +21,16 @@ public class BattlePane extends JPanel{
 	
 	mainFrame mFrame;
 	Character a;
-	private final Character Player1;
-	private final Character Player2;
+	//private final Character Player1;
+	//private final Character Player2;
 	
-	private Character currentCharacter;
-	private Character otherCharacter;
+	//private Character currentCharacter;
+	//private Character otherCharacter;
+	private final AbstractCharacter Player1;
+	private final AbstractCharacter Player2;
+	
+	private AbstractCharacter currentCharacter;
+	private AbstractCharacter otherCharacter;
 	
 	
 	private final int DELAY = 30;
@@ -208,13 +213,14 @@ public class BattlePane extends JPanel{
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			if(currentCharacter.getFrameCount() > currentCharacter.getTotalFrames()-1)
+			if(currentCharacter.getFramesShown() > currentCharacter.getTotalFrames()-1)
 			{
 				((Timer)e.getSource()).stop();
 				System.out.println("reached end condition");
 				//attackButton.setEnabled(true);//change to all buttons, or make switch turn method
 				currentCharacter.attack(otherCharacter);//move this elsewhere???
 				currentCharacter.reset();
+				System.out.println("Current health  = " + currentCharacter.getCurrentHealth());
 				nextTurn();
 
 			}

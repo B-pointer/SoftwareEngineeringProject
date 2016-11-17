@@ -202,17 +202,20 @@ public abstract class AbstractCharacter {
 	}
 	public void attack(AbstractCharacter a)
 	{
+		//a.dealDamage(100);
+		
 		Random x = new Random();
 		int z = x.nextInt(100);
-		System.out.println(z);
+		System.out.println("z = " + z);
 		if(z < rateOfSuccess)
 		{
 			double ratio = (x.nextInt(50) + 50)/100.0;
-			System.out.println(ratio);
+			System.out.println("Ratio = " + ratio);
 			int dmg = (int)(ratio*attack);
 			System.out.println("dmg = " + dmg);
 			a.dealDamage(dmg);
 		}
+		
 	}
 	public void dealDamage(int damageTaken)
 	{
@@ -250,5 +253,27 @@ public abstract class AbstractCharacter {
 	    	  g.drawImage(imageList[currentImageIndex], x, y,null);// targetPanel);
 	      }
 	}
-
+	public void attackUpdate()
+	{
+	//  System.out.println(FrameCount);
+			 // if(FrameCount % 10 == 0 && FrameCount/10 < NUM_IMG)//magic number here
+			  if(FramesShown == 11 || FramesShown == 27 || FramesShown == 33 || FramesShown == 42 )  
+					nextImage();
+			  if(isRightPlayer)
+		      {
+		         if(FramesShown < 30)
+		          x -= 30; //looks good at 25 with id condition at 10
+		         else 
+		          x+= 30; 
+		      }
+		      else
+		      {
+		         if(FramesShown < 30)
+		          x += 30; //looks good at 25 with id condition at 10
+		          else 
+		             x -= 30; 
+		      } 
+			 
+			  FramesShown ++; //might need to change where this is in the method
+	}
 }
