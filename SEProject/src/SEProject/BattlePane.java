@@ -21,16 +21,16 @@ public class BattlePane extends JPanel{
 	
 	mainFrame mFrame;
 	Character a;
-	//private final Character Player1;
-	//private final Character Player2;
+	private final Character Player1;
+	private final Character Player2;
 	
-	//private Character currentCharacter;
-	//private Character otherCharacter;
-	private final AbstractCharacter Player1;
-	private final AbstractCharacter Player2;
+	private Character currentCharacter;
+	private Character otherCharacter;
+	//private final AbstractCharacter Player1;
+//	private final AbstractCharacter Player2;
 	
-	private AbstractCharacter currentCharacter;
-	private AbstractCharacter otherCharacter;
+//	private AbstractCharacter currentCharacter;
+	//private AbstractCharacter otherCharacter;
 	
 	
 	private final int DELAY = 30;

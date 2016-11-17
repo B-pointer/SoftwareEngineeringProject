@@ -12,7 +12,7 @@ public class Goku extends AbstractCharacter{
 		setTargetPanel(bp);
 		SetIsRightPlayer(isRight);
 		setStats();
-		loadImages("Goku");
+		loadImages("Man");
 		setImageInfo();
 	}
 	public void setStats()
