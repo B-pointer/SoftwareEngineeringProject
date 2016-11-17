@@ -3,12 +3,11 @@ package SEProject;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
-
 import javax.swing.*;
 
 public abstract class AbstractCharacter {
 	
-	//static ints for constansts
+	//static ints for constants
 	final static int POTION_HEAL_AMOUNT = 85;
 	
 	// instance var's
@@ -40,6 +39,7 @@ public abstract class AbstractCharacter {
 	// constructor
 	public AbstractCharacter() {
 		// to be filled...
+		
 	}
 	
 	// setters
@@ -171,12 +171,17 @@ public abstract class AbstractCharacter {
 		return targetPanel;
 	}
 	//loading methods
-	private void loadImages()//should be overridden, no code here for now
+	public void loadImages(String name)
 	{
-		
-		
+		  imageList = new Image[numberImages];
+		  ImageIcon ii;
+	      for(int i=1; i< 5; i++)
+	      {
+	    	  //ii = new ImageIcon("characterImages/Man0001.png");
+	    	  ii = new ImageIcon("characterImages/" + name +i + ".png");
+	         imageList[i-1] = ii.getImage();
+	      }
 	}
-	
 	private void nextImage()
 	{
 		if(currentImageIndex > imageList.length-2)
@@ -213,13 +218,11 @@ public abstract class AbstractCharacter {
 	{
 		currentHealth -= damageTaken;
 	}
-
 	public void charge()//this should be overridden
 	{
 		isCharged = true;
 		//
-	}
-	
+	}	
 	public void reset()
 	{
 		currentImageIndex =0;
