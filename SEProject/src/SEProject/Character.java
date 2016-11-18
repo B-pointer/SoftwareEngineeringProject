@@ -7,18 +7,21 @@ import java.util.Random;
 
 
 public class Character {//extends AbstractCharacter{ ///throughout this need to replace magic numbers with variables for easier changing
-	//image array for animation frames
+	//Instance cariables related to images and drawing
 	private final int NUM_IMG = 3;//
 	private Image[] ImageList;//
 	private Image currentImage;//may not be used in favor of current image index found immediately below
 	private int currentImageIndex;
 	private int FrameCount;//
-	private int TotalFrames;//
-	//size of image info, dependent on images
-	private int width = 500;//
-	private int height = 500;//
-	
-	//more stats and things go here
+	private final  int TotalFrames = 50;//
+	private boolean isRightPlayer;//if this character is on the right side of the screen (controlled by player 2), set to true
+	//size of image info, dependent on images and image positions
+	private final int width = 500;//
+	private final int height = 500;//
+	private final int xBaseRight = mainFrame.FRAME_WIDTH-width;
+	private final int xBaseLeft = 15;
+	//Stats and battle conditions
+	private String characterName;
 	private int currentHealth;//
 	private int maxHealth;//
 	private int x;//
@@ -26,40 +29,113 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	private int attackPower;
 	private int defense;
 	private boolean isCharged;//
-	
-	 private int rateOfSuccess;//
-	
-	private boolean isRightPlayer;//if this character is on the right side of the screen (controlled by player 2), set to true
-	private final int POTION_HEAL_AMOUNT =85;//
+	private int rateOfSuccess;//
 	private int potionCount;//
+	private final int POTION_HEAL_AMOUNT =85;//
 	
-	BattlePane targetPanel;//may not be necessary, probably will be though for drawing images from files
+	//BattlePane reference, may not be necessary but I'll leave it in for now
+	BattlePane targetPanel;
 	
 	//parameterized constructor
-	public Character(BattlePane bp, boolean isRight)
+	public Character(BattlePane bp, boolean isRight, String name)
 	{
-		isRightPlayer = isRight;
-		
-		 if(isRightPlayer)//move to method?
-	         x = mainFrame.FRAME_WIDTH-width;
-	      else
-	         x=15;
-	      y=250;
-
+		characterName = name;
 		targetPanel = bp;
+		isRightPlayer = isRight;	
+		initImageInfo();
+		initCharacterStats();
+	}
+
+	/*
+	 * Getter Methods
+	 */
+	//returns max health
+	public int getMaxHealth()
+	{
+		return maxHealth;
+	}
+	//return currentHealth
+	public int getCurrentHealth()
+	{
+		return currentHealth;
+	}
+	//returns number of potions player currently has remaining
+	public int getPotionCount()
+	{
+		return potionCount;
+	}
+	//returns number of frames completed in current animation
+	public int getFramesShown()
+	{
+		return FrameCount;
+	}
+	//return total number of frames in the animation
+	public int getTotalFrames()
+	{
+		return TotalFrames;
+	}
+	//gets x coordinate of the character
+	public int getX()//
+	{
+		return x;
+	}
+	
+	/*
+	 * Methods related to setting character stats for each different character
+	 */
+	private void initCharacterStats()
+	{
+		switch(characterName)
+		{
+			case "goku": initAsGoku();
+			case "sam": initAsSam();
+			case "keanu": initAsKeanu();
+			case "randy": initAsRandy();
+		}
+	}
+	private void initAsGoku()
+	{
 		maxHealth= 400;
 		currentHealth= maxHealth;
-		potionCount = 3;
-		loadImages();
-		FrameCount = 0;
-		TotalFrames = 50;
-		currentImageIndex = 0;
+		potionCount = 3;	
+		isCharged = false;
+		rateOfSuccess = 60;
+		attackPower = 90;
+		System.out.println("My name is " + characterName + " and my attack power is " + attackPower);
+	}
+	
+	private void initAsSam()
+	{
+		maxHealth= 450;
+		currentHealth= maxHealth;
+		potionCount = 3;	
+		isCharged = false;
+		rateOfSuccess = 75;
+		attackPower = 70;
+	}
+	
+	private void initAsKeanu()
+	{
+		maxHealth= 500;
+		currentHealth= maxHealth;
+		potionCount = 3;	
 		isCharged = false;
 		rateOfSuccess = 70;
-		//setRateOfSuccess(70);
-		//setAttack(75);
-		attackPower = 75;
+		attackPower = 70;
 	}
+	
+	private void initAsRandy()
+	{
+		maxHealth= 425;
+		currentHealth= maxHealth;
+		potionCount = 3;	
+		isCharged = false;
+		rateOfSuccess = 90;
+		attackPower = 60;
+	}
+	/*
+	 * Methods related to loading and incrementing the images in the imageList array
+	 */	
 	//gets the images and stores them in array
 	private void loadImages()//
 	{
@@ -68,13 +144,13 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	      for(int i=1; i< NUM_IMG+1; i++)
 	      {
 	    	  //ii = new ImageIcon("characterImages/Man0001.png");
-	    	  ii = new ImageIcon("characterImages/sam"+i + ".png");
-	    	  //ii = new ImageIcon("characterImages/randy3" + ".png");
+	    	  //ii = new ImageIcon("characterImages/sam"+i + ".png");
+	    	  ii = new ImageIcon("characterImages/" + characterName + i +  ".png");
 	    	  ImageList[i-1] = ii.getImage();
 	      }
 	      System.out.println("length of array= " +ImageList.length);
 	}
-	
+	//assigns the currentImageINdex to the next number, effectively stepping through the animation frames
 	private void nextImage()//
 	{
 		if(currentImageIndex > ImageList.length-2)
@@ -82,27 +158,30 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		else 
 			currentImageIndex ++;
 	}
-	//returns max health
-	public int getMaxHealth()//
+	//sets the x and y location and initializes values related to images such as the index and frame count;
+	private void initImageInfo()
 	{
-		return maxHealth;
+		loadImages();
+		FrameCount = 0;
+		currentImageIndex = 0;
+		if(isRightPlayer) //sets x based on right or left character
+	        x = xBaseRight;
+	    else
+	        x=xBaseLeft;
+		y=height/2;//sets the y coordinate
 	}
-
-	//return currentHealth
-	public int getCurrentHealth()//
-	{
-		return currentHealth;
-		
-	}
-	
+	/*
+	 * Battle Actions(heal, attack, and charge)
+	 */
+	//randomly decides whether an attack will hit, calcualtes damage, and uses dealDamage to harm the other player
 	public void attack(Character a)//
 	{
 		Random x = new Random();
 		int z = x.nextInt(100);
 		System.out.println(z);
-		if(z < rateOfSuccess)
+		if(z < rateOfSuccess)//determines if an attack hits and deals any damage
 		{
-			double ratio = (x.nextInt(50) + 50)/100.0;
+			double ratio = (x.nextInt(51) + 50)/100.0;//this code ensures that if an attack hits, it does at least half of the maximum attack damage
 			System.out.println(ratio);
 			int dmg = (int)(ratio*attackPower);
 			System.out.println("dmg = " + dmg);
@@ -111,24 +190,28 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		
 		//a.dealDamage(50);
 	}
-
-	public int getPotionCount()//
-	{
-		return potionCount;
-	}
-
+	//increases rate of success of character, making attacks mroe accurate
 	public void charge()//
 	{
 		isCharged = true;
+		rateOfSuccess += 10;
 		//code goes here for increasing the rate of success
 	}
-
+	//increases health and decreases number of potions
+	public void heal()//
+	{
+		currentHealth += POTION_HEAL_AMOUNT;
+		potionCount --;
+	}
+	
+	/*
+	 * Helper Methods for battle actions and code related to attack animation
+	 */
 	//deals damage, called by other player class in the battle
-	public void dealDamage(int damage)//
+	private void dealDamage(int damage)//
 	{
 		currentHealth -= damage;	
 	}
-
 	//changes value of x and will change the current picture index
 	public void attackUpdate()
 	{
@@ -154,19 +237,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		 
 		  FrameCount ++; //might need to change where this is in the method
 	}
-
-	//returns number of frames completed in current animation
-	public int getFramesShown()//
-	{
-		return FrameCount;
-	}
-
-	//return total number of frames in the animation
-	public int getTotalFrames()//
-	{
-		return TotalFrames;
-	}
-
+	//resets the current image index and the character's x coordinate
 	public void reset()//
 	{
 		if(isRightPlayer)
@@ -176,20 +247,6 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	      currentImageIndex = 0;
 	      FrameCount = 0;
 	}
-
-	//increases health and decreases number of potions
-	public void heal()//
-	{
-		currentHealth += POTION_HEAL_AMOUNT;
-		potionCount --;
-		
-	}
-	//gets x coordinate of the character
-	public int getX()//
-	{
-		return x;
-	}
-	
 	//draws the player
 	public void drawMe(Graphics g)//, boolean isLeft)//////
 	{
@@ -213,11 +270,6 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		        }
 	    	  g.drawImage(ImageList[currentImageIndex], x, y,null);// targetPanel);
 	    	  
-	    	 /*
-	    	  g.drawImage(ImageList[currentImageIndex], x, y,null);
-	    	  g.drawImage(ImageList[currentImageIndex+1], x+200, y,null);
-	    	  g.drawImage(ImageList[currentImageIndex+2], x+200, y,null);
-	    	  */
 	      }
 	}	
 }
