@@ -47,8 +47,8 @@ public class BattlePane extends JPanel{
 		
 		mFrame.add(this);
 		//a =  new Character(this);
-		Player1= new Character(this, false, "goku");
-		Player2 = new Character(this, true, "sam");
+		Player1= new Character(this, false, "keanu");
+		Player2 = new Character(this, true, "randy");
 
 		currentCharacter = Player1;
 		otherCharacter = Player2;

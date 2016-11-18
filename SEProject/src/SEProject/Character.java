@@ -10,7 +10,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	//Instance cariables related to images and drawing
 	private final int NUM_IMG = 3;//
 	private Image[] ImageList;//
-	private Image currentImage;//may not be used in favor of current image index found immediately below
+	private Image auraImage;
 	private int currentImageIndex;
 	private int FrameCount;//
 	private final  int TotalFrames = 50;//
@@ -148,7 +148,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	    	  ii = new ImageIcon("characterImages/" + characterName + i +  ".png");
 	    	  ImageList[i-1] = ii.getImage();
 	      }
-	      System.out.println("length of array= " +ImageList.length);
+	      ii = new ImageIcon("characterImages/aura.png");
+	      auraImage = ii.getImage();
+	      //System.out.println("length of array= " +ImageList.length);
 	}
 	//assigns the currentImageINdex to the next number, effectively stepping through the animation frames
 	private void nextImage()//
@@ -255,8 +257,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	      {
 	         if(isCharged)
 	         {
-	        	 g.setColor(new Color(255, 255, 0, 31));
-	        	 g.fillRect(x, y, width, height);
+	        	 g.drawImage(auraImage, x+width, y,-width, height,null );
+	        	 //g.setColor(new Color(255, 255, 0, 31));
+	        	 //g.fillRect(x, y, width, height);
 	        }
 	         g.drawImage(ImageList[currentImageIndex], x+width, y,-width, height,null );//targetPanel);
 	      }
@@ -265,8 +268,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	    	  
 	    	  if(isCharged)
 		         {
-		        	 g.setColor(new Color(255, 255, 0, 31));
-		        	 g.fillRect(x, y, width, height);
+		        	// g.setColor(new Color(255, 255, 0, 31));
+		        	// g.fillRect(x, y, width, height);
+	    		    g.drawImage(auraImage, x, y,null);
 		        }
 	    	  g.drawImage(ImageList[currentImageIndex], x, y,null);// targetPanel);
 	    	  
