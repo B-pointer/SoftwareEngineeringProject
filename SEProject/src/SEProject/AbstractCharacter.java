@@ -173,7 +173,7 @@ public abstract class AbstractCharacter {
 	//loading methods
 	public void loadImages(String name)
 	{
-		  imageList = new Image[numberImages];
+		  imageList = new Image[3];//numberImages];
 		  ImageIcon ii;
 	      for(int i=1; i< 5; i++)
 	      {
@@ -249,7 +249,6 @@ public abstract class AbstractCharacter {
 		        	 g.setColor(new Color(255, 255, 0, 31));
 		        	 g.fillRect(x, y, imageWidth, imageHeight);
 		        }
-	    	  ImageIcon ii = new ImageIcon("characterImages/Man0001.png");
 	    	  g.drawImage(imageList[currentImageIndex], x, y,null);// targetPanel);
 	      }
 	}

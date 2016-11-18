@@ -27,9 +27,9 @@ public class BattlePane extends JPanel{
 	private Character currentCharacter;
 	private Character otherCharacter;
 	//private final AbstractCharacter Player1;
-//	private final AbstractCharacter Player2;
+	//private final AbstractCharacter Player2;
 	
-//	private AbstractCharacter currentCharacter;
+	//private AbstractCharacter currentCharacter;
 	//private AbstractCharacter otherCharacter;
 	
 	
@@ -49,6 +49,7 @@ public class BattlePane extends JPanel{
 		//a =  new Character(this);
 		Player1= new Character(this, false);
 		Player2 = new Character(this, true);
+
 		currentCharacter = Player1;
 		otherCharacter = Player2;
 	}

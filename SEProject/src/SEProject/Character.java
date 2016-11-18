@@ -41,7 +41,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		isRightPlayer = isRight;
 		
 		 if(isRightPlayer)//move to method?
-	         x = mainFrame.FRAME_WIDTH-250;
+	         x = mainFrame.FRAME_WIDTH-width;
 	      else
 	         x=15;
 	      y=250;
@@ -68,7 +68,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	      for(int i=1; i< NUM_IMG+1; i++)
 	      {
 	    	  //ii = new ImageIcon("characterImages/Man0001.png");
-	    	  ii = new ImageIcon("characterImages/goku"+i + ".png");
+	    	  ii = new ImageIcon("characterImages/sam"+i + ".png");
 	    	  //ii = new ImageIcon("characterImages/randy3" + ".png");
 	    	  ImageList[i-1] = ii.getImage();
 	      }
@@ -140,9 +140,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		  if(isRightPlayer)
 	      {
 	         if(FrameCount < 30)
-	          x -= 30; //looks good at 25 with id condition at 10
+	          x -= 20; //looks good at 25 with id condition at 10
 	         else 
-	          x+= 30; 
+	          x+= 20; 
 	      }
 	      else
 	      {
@@ -170,7 +170,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	public void reset()//
 	{
 		if(isRightPlayer)
-	         x= mainFrame.FRAME_WIDTH-250;
+	         x= mainFrame.FRAME_WIDTH-width;
 	      else
 	         x =15;
 	      currentImageIndex = 0;
