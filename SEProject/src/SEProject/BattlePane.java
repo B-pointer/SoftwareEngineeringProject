@@ -58,7 +58,7 @@ public class BattlePane extends JPanel{
 	public void nextTurn()
 	{
 		swapCurrent();
-		updateGUI();
+		updateHealButton();
 		enableButtons();
 		repaint();
 	}
@@ -75,7 +75,7 @@ public class BattlePane extends JPanel{
 		
 		chargeButton.setEnabled(true);
 		if(currentCharacter.getPotionCount() > 0)
-		healButton.setEnabled(true);
+			healButton.setEnabled(true);
 	}
 	//swaps the current player and other player
 	public void swapCurrent()
@@ -170,10 +170,10 @@ public class BattlePane extends JPanel{
 		
 	}
 	//updates the buttons (and likely will update the status message should we add one)
-	public void updateGUI()//needs to be called by another method instead of the heal listener class, but first need to implement turns
+	public void updateHealButton()//needs to be called by another method instead of the heal listener class, but first need to implement turns
 	{
 		healButton.setText("Heal(" + currentCharacter.getPotionCount() + ")");//change to currentPLayer
-		if(currentCharacter.getPotionCount() < 1)//change to currentPlayer
+		if(currentCharacter.getPotionCount() < 1 )//change to currentPlayer
 			healButton.setEnabled(false);
 	}
 	
