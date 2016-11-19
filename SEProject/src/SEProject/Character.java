@@ -203,6 +203,8 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	public void heal()//
 	{
 		currentHealth += POTION_HEAL_AMOUNT;
+		if(currentHealth > maxHealth)
+			currentHealth = maxHealth;
 		potionCount --;
 	}
 	
