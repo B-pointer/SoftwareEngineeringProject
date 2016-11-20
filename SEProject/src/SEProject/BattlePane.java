@@ -17,21 +17,24 @@ public class BattlePane extends JPanel{
 	private JButton attackButton;
 	private JButton chargeButton;
 	private JButton healButton;
-	JButton NextRoundButton;
+	private JButton NextRoundButton;
 	
 	mainFrame mFrame;
 	private Character Player1;
 	private Character Player2;
 	private Character currentCharacter;
 	private Character otherCharacter;
-	
 	private int currentRoundCount;
+	private int Player1Wins;
+	private int Player2Wins;
 	
 	//parameterized constructor takes mainFrame as argument 
 	//this should be sorted into several other methods (i.e. resetPlayers so that matches can be more easily implemented)
 	public BattlePane(mainFrame maFrame)//add player class
 	{
 		currentRoundCount = 0;
+		Player1Wins = 0;
+		Player2Wins = 0;
 		mFrame = maFrame;
 		setLayout(null);
 		addButtons();
@@ -61,12 +64,21 @@ public class BattlePane extends JPanel{
 		System.out.println("Next Turn");
 		if(checkRoundEnd())
 		{
-			showEndOfRound();
 			System.out.println("Round Over");
 			if(currentCharacter.equals(Player1))
+			{
 				System.out.println("Player 1 wins");
+				Player1Wins ++;
+			}
 			else
-				System.out.println("Player 2 wins");		 
+			{
+				System.out.println("Player 2 wins");
+				Player2Wins ++;
+			}
+			if(checkBattleEnd())
+				showEndOfBattle();
+			else
+				showEndOfRound();
 		}
 		swapCurrent();
 		updateHealButton();
@@ -95,15 +107,20 @@ public class BattlePane extends JPanel{
 		return (otherCharacter.getCurrentHealth() < 1);
 	}
 	
+	public boolean checkBattleEnd()
+	{
+		return (Player1Wins  >1 || Player2Wins > 1);	
+	}
 	/*
-	 * Methods related to adding and disabling buttons
+	 * Methods related to adding and disabling buttons and panels
 	 */
 	
 	//adds buttons to button panel and then adds the button panel to the main panel
 	private void addButtons()
 	{
 		buttonPanel = new JPanel();
-		//buttonPanel.setPreferredSize(new Dimension(mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT ));
+		buttonPanel.setBackground(new Color(213, 45, 216));
+		buttonPanel.setBounds(0, mainFrame.FRAME_HEIGHT - BUTTON_PANEL_HEIGHT-29, mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT);
 		
 		attackButton = new JButton("Attack");
 		attackButton.setBackground(new Color(123, 123, 231));
@@ -115,7 +132,6 @@ public class BattlePane extends JPanel{
 		healButton.setBackground(new Color(123, 123, 231));
 		healButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		healButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
-		
 		healButton.addActionListener(new HealListener());
 		
 		chargeButton = new JButton("Charge");
@@ -123,9 +139,6 @@ public class BattlePane extends JPanel{
 		chargeButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		chargeButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
 		chargeButton.addActionListener(new ChargeListener());
-		
-		buttonPanel.setBackground(new Color(213, 45, 216));
-		buttonPanel.setBounds(0, mainFrame.FRAME_HEIGHT - BUTTON_PANEL_HEIGHT-29, mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT);
 		
 		NextRoundButton= new JButton ("Next Round");
 		NextRoundButton.setBackground(Color.DARK_GRAY);
@@ -140,7 +153,6 @@ public class BattlePane extends JPanel{
 		buttonPanel.add(chargeButton);
 		buttonPanel.add(NextRoundButton);
 		add(buttonPanel);
-
 	}
 	
 	//updates the buttons (and likely will update the status message should we add one)
@@ -176,6 +188,21 @@ public class BattlePane extends JPanel{
 		 NextRoundButton.setVisible(true);
 	}
 	
+	//display for end of battle
+	public void showEndOfBattle()
+	{	
+		hideActionButtons();
+		NextRoundButton.setVisible(false);
+		
+		JButton endButton = new JButton("Return to Menu");
+		endButton.setBackground(Color.DARK_GRAY);
+		endButton.setForeground(Color.LIGHT_GRAY);
+		endButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
+		endButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		endButton.addActionListener(new EndListener());
+		buttonPanel.add(endButton);
+	}
+	
 	//hides all action buttons by setting them to be invisible
 	public void hideActionButtons()
 	{
@@ -207,7 +234,9 @@ public class BattlePane extends JPanel{
 		currentCharacter.drawMe(g);
 		g.setColor(new Color(0, 255, 0, 80));
 		setFont(new Font("Arial", Font.PLAIN, 40));
-		g.drawString("Round " + currentRoundCount, 520, 70);
+		g.drawString("Round " + currentRoundCount, 520, 60);
+		g.drawString("Wins: " + Player1Wins, 40, 120);
+		g.drawString("Wins: " + Player2Wins, 950, 120);
 		if(currentCharacter.equals(Player1))
 		{
 			g.fillRect(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, 15);//mainFrame.FRAME_HEIGHT-150);
@@ -247,7 +276,7 @@ public class BattlePane extends JPanel{
 	/*
 	 * Listeners for buttons
 	 */
-	
+
 	//listener for attack button, callsPerform attack
 	private class AttackListener implements ActionListener
 	{
@@ -283,6 +312,15 @@ public class BattlePane extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			resetBattle();
+		}	
+	}
+	//returns to the main menu
+	//Listener for next round button, calls resetBattle
+	private class EndListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			mFrame.setMainMenu();
 		}	
 	}
 	

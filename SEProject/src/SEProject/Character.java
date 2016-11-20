@@ -79,6 +79,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	{
 		return x;
 	}
+
 	
 	/*
 	 * Methods related to setting character stats for each different character
@@ -116,7 +117,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	
 	private void initAsKeanu()//definitely changes these values
 	{
-		maxHealth= 30;
+		maxHealth= 85;
 		currentHealth= maxHealth;
 		potionCount = 3;	
 		isCharged = false;
@@ -126,7 +127,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	
 	private void initAsRandy()//definitely changes these values
 	{
-		maxHealth= 35;
+		maxHealth= 100;
 		currentHealth= maxHealth;
 		potionCount = 3;	
 		isCharged = false;
@@ -173,7 +174,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		y=height/2;//sets the y coordinate
 	}
 	/*
-	 * Battle Actions(heal, attack, and charge)
+	 * Battle Actions(heal, attack, and charge) and incrementing rounds won
 	 */
 	//randomly decides whether an attack will hit, calcualtes damage, and uses dealDamage to harm the other player
 	public void attack(Character a)//
@@ -207,7 +208,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 			currentHealth = maxHealth;
 		potionCount --;
 	}
-	
+	//increments number of rounds won
 	/*
 	 * Helper Methods for battle actions and code related to attack animation
 	 */
