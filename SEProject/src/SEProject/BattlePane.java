@@ -17,6 +17,7 @@ public class BattlePane extends JPanel{
 	private JButton attackButton;
 	private JButton chargeButton;
 	private JButton healButton;
+	JButton NextRoundButton;
 	
 	mainFrame mFrame;
 	private Character Player1;
@@ -44,6 +45,9 @@ public class BattlePane extends JPanel{
 	//resets the battle, creating new instances of the characters and thus restoring them to full health and full potion. called during construction and at beginning of each new round
 	public void resetBattle()
 	{
+		showActionButtons();
+		NextRoundButton.setVisible(false);
+		
 		currentRoundCount += 1;
 		Player1= new Character(this, false, "keanu");
 		Player2 = new Character(this, true, "randy");
@@ -57,13 +61,12 @@ public class BattlePane extends JPanel{
 		System.out.println("Next Turn");
 		if(checkRoundEnd())
 		{
-			
+			showEndOfRound();
 			System.out.println("Round Over");
 			if(currentCharacter.equals(Player1))
 				System.out.println("Player 1 wins");
 			else
-				System.out.println("Player 2 wins");
-			 
+				System.out.println("Player 2 wins");		 
 		}
 		swapCurrent();
 		updateHealButton();
@@ -124,9 +127,18 @@ public class BattlePane extends JPanel{
 		buttonPanel.setBackground(new Color(213, 45, 216));
 		buttonPanel.setBounds(0, mainFrame.FRAME_HEIGHT - BUTTON_PANEL_HEIGHT-29, mainFrame.FRAME_WIDTH, BUTTON_PANEL_HEIGHT);
 		
+		NextRoundButton= new JButton ("Next Round");
+		NextRoundButton.setBackground(Color.DARK_GRAY);
+		NextRoundButton.setForeground(Color.LIGHT_GRAY);
+		NextRoundButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_PANEL_HEIGHT/2));
+		NextRoundButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		NextRoundButton.addActionListener(new NextListener());
+		NextRoundButton.setVisible(false);
+		
 		buttonPanel.add(attackButton);
 		buttonPanel.add(healButton);
 		buttonPanel.add(chargeButton);
+		buttonPanel.add(NextRoundButton);
 		add(buttonPanel);
 
 	}
@@ -156,6 +168,30 @@ public class BattlePane extends JPanel{
 		if(currentCharacter.getPotionCount() > 0)
 			healButton.setEnabled(true);
 	}
+	
+	//shows the end of round button and hides the other buttons
+	public void showEndOfRound()
+	{
+		 hideActionButtons();
+		 NextRoundButton.setVisible(true);
+	}
+	
+	//hides all action buttons by setting them to be invisible
+	public void hideActionButtons()
+	{
+		attackButton.setVisible(false);
+		healButton.setVisible(false);
+		chargeButton.setVisible(false);
+	}
+	
+	//sets all action buttons visible so they can be interacted with
+	public void showActionButtons()
+	{
+		attackButton.setVisible(true);
+		healButton.setVisible(true);
+		chargeButton.setVisible(true);
+	}
+	
 	
 	/*
 	 * Methods related to drawing
@@ -208,7 +244,6 @@ public class BattlePane extends JPanel{
 		t.start();
 	}
 	
-	
 	/*
 	 * Listeners for buttons
 	 */
@@ -240,6 +275,14 @@ public class BattlePane extends JPanel{
 			System.out.println("Charge");
 			currentCharacter.charge();
 			nextTurn();
+		}	
+	}	
+	//Listener for next round button, calls resetBattle
+	private class NextListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			resetBattle();
 		}	
 	}
 	
