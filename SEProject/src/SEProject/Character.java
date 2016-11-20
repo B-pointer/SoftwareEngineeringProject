@@ -114,9 +114,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		attackPower = 70;
 	}
 	
-	private void initAsKeanu()
+	private void initAsKeanu()//definitely changes these values
 	{
-		maxHealth= 500;
+		maxHealth= 30;
 		currentHealth= maxHealth;
 		potionCount = 3;	
 		isCharged = false;
@@ -124,9 +124,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		attackPower = 70;
 	}
 	
-	private void initAsRandy()
+	private void initAsRandy()//definitely changes these values
 	{
-		maxHealth= 425;
+		maxHealth= 35;
 		currentHealth= maxHealth;
 		potionCount = 3;	
 		isCharged = false;
@@ -180,11 +180,11 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	{
 		Random x = new Random();
 		int z = x.nextInt(100);
-		System.out.println(z);
+		//System.out.println(z);
 		if(z < rateOfSuccess)//determines if an attack hits and deals any damage
 		{
 			double ratio = (x.nextInt(51) + 50)/100.0;//this code ensures that if an attack hits, it does at least half of the maximum attack damage
-			System.out.println(ratio);
+			//System.out.println(ratio);
 			int dmg = (int)(ratio*attackPower);
 			System.out.println("dmg = " + dmg);
 			a.dealDamage(dmg);
@@ -214,7 +214,9 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	//deals damage, called by other player class in the battle
 	private void dealDamage(int damage)//
 	{
-		currentHealth -= damage;	
+		currentHealth -= damage;
+		if(currentHealth < 0)
+			currentHealth = 0;
 	}
 	//changes value of x and will change the current picture index
 	public void attackUpdate()

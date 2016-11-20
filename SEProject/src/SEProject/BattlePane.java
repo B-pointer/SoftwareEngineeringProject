@@ -7,76 +7,70 @@ import javax.swing.*;
 
 public class BattlePane extends JPanel{
 	
-	
+	//constants and final ints
+	private final int DELAY = 30;//delay for the timer that moves the images
 	private final int BUTTON_PANEL_HEIGHT= 100;// height of button panel added to the bottom of the panel
-	private final int BUTTON_WIDTH;
+	private final int BUTTON_WIDTH = (mainFrame.FRAME_WIDTH/3)-20;
+	
 	//instance fields 
 	private JPanel buttonPanel;  
-	private boolean isPlayer1Turn;
 	private JButton attackButton;
 	private JButton chargeButton;
 	private JButton healButton;
 	
-	//private String StatusLabel;
-	
 	mainFrame mFrame;
-	Character a;
-	private final Character Player1;
-	private final Character Player2;
-	
+	private Character Player1;
+	private Character Player2;
 	private Character currentCharacter;
 	private Character otherCharacter;
-	//private final AbstractCharacter Player1;
-	//private final AbstractCharacter Player2;
 	
-	//private AbstractCharacter currentCharacter;
-	//private AbstractCharacter otherCharacter;
+	private int currentRoundCount;
 	
-	
-	private final int DELAY = 30;
 	//parameterized constructor takes mainFrame as argument 
 	//this should be sorted into several other methods (i.e. resetPlayers so that matches can be more easily implemented)
 	public BattlePane(mainFrame maFrame)//add player class
 	{
-		BUTTON_WIDTH = (mainFrame.FRAME_WIDTH/3)-20;
+		currentRoundCount = 0;
 		mFrame = maFrame;
 		setLayout(null);
 		addButtons();
-		
-		//StatusLabel = "d;lksdjf;alkdjfal;k";
-		
 		mFrame.add(this);
-		//a =  new Character(this);
+		resetBattle();
+		
+	}
+	/*
+	 * Methods related to initializing battle, turns, and determing if round/matches are over
+	 */
+	//resets the battle, creating new instances of the characters and thus restoring them to full health and full potion. called during construction and at beginning of each new round
+	public void resetBattle()
+	{
+		currentRoundCount += 1;
 		Player1= new Character(this, false, "keanu");
 		Player2 = new Character(this, true, "randy");
-
 		currentCharacter = Player1;
 		otherCharacter = Player2;
 	}
-
+	
 	//resets buttons for next turn
 	public void nextTurn()
 	{
+		System.out.println("Next Turn");
+		if(checkRoundEnd())
+		{
+			
+			System.out.println("Round Over");
+			if(currentCharacter.equals(Player1))
+				System.out.println("Player 1 wins");
+			else
+				System.out.println("Player 2 wins");
+			 
+		}
 		swapCurrent();
 		updateHealButton();
 		enableButtons();
 		repaint();
 	}
 	//switch buttons on and off
-	public void disableButtons()
-	{
-		attackButton.setEnabled(false);
-		healButton.setEnabled(false);
-		chargeButton.setEnabled(false);
-	}
-	public void enableButtons()
-	{
-		attackButton.setEnabled(true);
-		
-		chargeButton.setEnabled(true);
-		if(currentCharacter.getPotionCount() > 0)
-			healButton.setEnabled(true);
-	}
 	//swaps the current player and other player
 	public void swapCurrent()
 	   {
@@ -91,6 +85,16 @@ public class BattlePane extends JPanel{
 	         otherCharacter = Player2;
 	      }
 	   }
+	
+	//returns true if the otherCharacter has fewer than 1 health
+	public boolean checkRoundEnd()
+	{
+		return (otherCharacter.getCurrentHealth() < 1);
+	}
+	
+	/*
+	 * Methods related to adding and disabling buttons
+	 */
 	
 	//adds buttons to button panel and then adds the button panel to the main panel
 	private void addButtons()
@@ -126,6 +130,60 @@ public class BattlePane extends JPanel{
 		add(buttonPanel);
 
 	}
+	
+	//updates the buttons (and likely will update the status message should we add one)
+	public void updateHealButton()//needs to be called by another method instead of the heal listener class, but first need to implement turns
+	{
+		healButton.setText("Heal(" + currentCharacter.getPotionCount() + ")");//change to currentPLayer
+		if(currentCharacter.getPotionCount() < 1 )//change to currentPlayer
+			healButton.setEnabled(false);
+	}
+	
+	//disables the attack, charge, and heal buttons on the GUI
+	public void disableButtons()
+	{
+		attackButton.setEnabled(false);
+		healButton.setEnabled(false);
+		chargeButton.setEnabled(false);
+	}
+	
+	//enables the attack, heal, and charge buttons on the GUI. Heal is only enabled if the current player has potions remaining
+	public void enableButtons()
+	{
+		attackButton.setEnabled(true);
+		
+		chargeButton.setEnabled(true);
+		if(currentCharacter.getPotionCount() > 0)
+			healButton.setEnabled(true);
+	}
+	
+	/*
+	 * Methods related to drawing
+	 */
+	//override of paintComponent, calls drawMethod for characters
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		//a.drawMe(g, true);
+		//g.drawString(StatusLabel, 400, 700);
+		drawHealthBars(g);
+		otherCharacter.drawMe(g);
+		currentCharacter.drawMe(g);
+		g.setColor(new Color(0, 255, 0, 80));
+		setFont(new Font("Arial", Font.PLAIN, 40));
+		g.drawString("Round " + currentRoundCount, 520, 70);
+		if(currentCharacter.equals(Player1))
+		{
+			g.fillRect(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, 15);//mainFrame.FRAME_HEIGHT-150);
+		}
+		else
+		{
+			g.fillRect(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , 15);//mainFrame.FRAME_HEIGHT-150);
+		}
+		
+		
+	}
+	
 	//called by paintComponent, draws the health bars of the players based on their current and max health
 	private void drawHealthBars(Graphics g)
 	{
@@ -141,54 +199,30 @@ public class BattlePane extends JPanel{
 		g.drawRect(40, 40, 450, 30);
 		g.drawRect(mainFrame.FRAME_WIDTH-500, 40, 450, 30);
 	}
-
+	
+	//Uses a timer to display animation frames. disables buttons during the animation. The buttons are re-enabled at by the nextTurn method
 	private void performAttack()
 	{
-		disableButtons();//need to disable all buttons
+		disableButtons();
 		Timer t = new Timer(DELAY, new animationListener());
 		t.start();
-		
-	}
-	//override of paintComponent, calls drawMethod for characters
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		//a.drawMe(g, true);
-		//g.drawString(StatusLabel, 400, 700);
-		drawHealthBars(g);
-		otherCharacter.drawMe(g);
-		currentCharacter.drawMe(g);
-		g.setColor(new Color(0, 255, 0, 80));
-		if(currentCharacter.equals(Player1))
-		{
-			g.fillRect(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, 15);//mainFrame.FRAME_HEIGHT-150);
-		}
-		else
-		{
-			g.fillRect(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , 15);//mainFrame.FRAME_HEIGHT-150);
-		}
-		
-	}
-	//updates the buttons (and likely will update the status message should we add one)
-	public void updateHealButton()//needs to be called by another method instead of the heal listener class, but first need to implement turns
-	{
-		healButton.setText("Heal(" + currentCharacter.getPotionCount() + ")");//change to currentPLayer
-		if(currentCharacter.getPotionCount() < 1 )//change to currentPlayer
-			healButton.setEnabled(false);
 	}
 	
-	//listener for attack button
+	
+	/*
+	 * Listeners for buttons
+	 */
+	
+	//listener for attack button, callsPerform attack
 	private class AttackListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Attack");
 			performAttack();
-			//Player1.dealDamage(30);//change to current Player
-			//repaint();
 		}	
 	}
-	//listener for Heal Button
+	//listener for Heal Button, calls nextTurn after calling hea button for current player
 	private class HealListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -198,7 +232,7 @@ public class BattlePane extends JPanel{
 			nextTurn();
 		}	
 	}
-	//listener for charge button
+	//listener for charge button, calls nextTurn after calling charge method for current player
 	private class ChargeListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -209,7 +243,7 @@ public class BattlePane extends JPanel{
 		}	
 	}
 	
-	//listener for animation timer 
+	//listener for animation timer, calls next turn when attack animation is over. Calls attackUpdate for current player to update position and picture
 	private class animationListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -217,13 +251,11 @@ public class BattlePane extends JPanel{
 			if(currentCharacter.getFramesShown() > currentCharacter.getTotalFrames()-1)
 			{
 				((Timer)e.getSource()).stop();
-				System.out.println("reached end condition");
-				//attackButton.setEnabled(true);//change to all buttons, or make switch turn method
+				//System.out.println("reached end condition");
 				currentCharacter.attack(otherCharacter);//move this elsewhere???
 				currentCharacter.reset();
-				System.out.println("Current health  = " + currentCharacter.getCurrentHealth());
+				//System.out.println("Current health  = " + currentCharacter.getCurrentHealth());
 				nextTurn();
-
 			}
 			else
 			{
