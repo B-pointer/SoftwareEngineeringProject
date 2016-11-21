@@ -13,6 +13,7 @@ public class MainMenu extends JPanel{
 	JButton ExitButton;
 	private final int buttonLength = 100;
 	private final int buttonHeight = 40;
+	private Image background;
 	
 	public MainMenu(mainFrame maFrame)
 	{
@@ -20,6 +21,8 @@ public class MainMenu extends JPanel{
 		this.mFrame = maFrame;
 		addButtons();
 		setBackground(Color.GREEN);
+		ImageIcon ii = new ImageIcon("backgroundImages/background1.jpg");
+		background = ii.getImage();
 		mFrame.add(this);
 	}	
 	public void addButtons()
@@ -41,6 +44,13 @@ public class MainMenu extends JPanel{
 		add(ExitButton);
 		
 	}
+	
+	public void paintComponent(Graphics g)
+	{
+		g.drawImage(background, 0, 0, this);
+	}
+	
+	
 	//Listener class for the start button, sets the active panel in the main frame to battle pane, needs to be updated so that it instead navigates to the character select screen
 	private class StartListener implements ActionListener
 	{
