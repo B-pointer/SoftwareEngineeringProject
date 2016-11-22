@@ -52,8 +52,8 @@ public class BattlePane extends JPanel{
 		NextRoundButton.setVisible(false);
 		
 		currentRoundCount += 1;
-		Player1= new Character(this, false, "keanu");
-		Player2 = new Character(this, true, "randy");
+		Player1= new Character(this, false,"goku" );//"keanu");
+		Player2 = new Character(this, true, "sam");//"randy");
 		currentCharacter = Player1;
 		otherCharacter = Player2;
 	}

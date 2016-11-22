@@ -88,10 +88,10 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	{
 		switch(characterName)
 		{
-			case "goku": initAsGoku();
-			case "sam": initAsSam();
-			case "keanu": initAsKeanu();
-			case "randy": initAsRandy();
+			case "goku": initAsGoku(); break;
+			case "sam": initAsSam(); break;
+			case "keanu": initAsKeanu(); break;
+			case "randy": initAsRandy(); break;
 		}
 	}
 	private void initAsGoku()
