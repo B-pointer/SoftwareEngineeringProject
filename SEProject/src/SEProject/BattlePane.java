@@ -252,16 +252,18 @@ public class BattlePane extends JPanel{
 	//called by paintComponent, draws the health bars of the players based on their current and max health
 	private void drawHealthBars(Graphics g)
 	{
-		double char1Ratio = ((double)Player1.getCurrentHealth())/Player1.getMaxHealth();
-		double char2Ratio = ((double)Player2.getCurrentHealth())/Player1.getMaxHealth();
-		int fillAmount = ((int)(450*char1Ratio));
-		int fillAmount2 = ((int)(450*char2Ratio));
+		
+		int OffSet = 50;
+		int length1 = (int)(((double)Player1.getCurrentHealth()/Player1.getMaxHealth())*450);
+		int length2 = (int)(((double)Player2.getCurrentHealth()/Player2.getMaxHealth())*450);
+		
 		g.setColor(Color.RED);
-		g.fillRect(40, 40, fillAmount, 30);
-		g.fillRect(mainFrame.FRAME_WIDTH-(500-(450-fillAmount2)), 40, fillAmount2, 30);
-		//g.fillRect(mainFrame.FRAME_WIDTH-500, 40, fillAmount2, 30);
+		g.fillRect(OffSet, 40, length1, 30);
+		g.fillRect(mainFrame.FRAME_WIDTH-(length2+OffSet), 40, length2, 30);
+		
+		
 		g.setColor(Color.BLACK);
-		g.drawRect(40, 40, 450, 30);
+		g.drawRect(OffSet, 40, 450, 30);
 		g.drawRect(mainFrame.FRAME_WIDTH-500, 40, 450, 30);
 	}
 	

@@ -44,6 +44,8 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 		isRightPlayer = isRight;	
 		initImageInfo();
 		initCharacterStats();
+		
+		System.out.println("Name: "+characterName + "CHealth: " + currentHealth + "MHealth: " + maxHealth + "ATK: " + attackPower);
 	}
 
 	/*
