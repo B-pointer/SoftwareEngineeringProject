@@ -80,7 +80,7 @@ public class mainFrame extends JFrame {
 	}
 	
 	//sets the panel to a battle pane
-	public void setBattlePane()
+	public void setBattlePane(String charName1, String charName2)
 	{
 		getContentPane().removeAll();
 		getContentPane().invalidate();

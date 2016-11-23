@@ -37,7 +37,7 @@ public class charSelectPane extends JPanel {
 		imageList = new ArrayList<ImageIcon>();
 		for(int i=0; i < NUMBER_BUTTONS; i++)
 		{
-			ImageIcon ii = new ImageIcon("charSelectImages/Example.png");
+			ImageIcon ii = new ImageIcon("charSelectImages/charSel" + i + ".png");
 			imageList.add(ii);
 		}
 	}

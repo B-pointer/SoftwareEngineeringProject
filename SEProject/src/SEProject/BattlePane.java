@@ -32,7 +32,7 @@ public class BattlePane extends JPanel{
 	
 	//parameterized constructor takes mainFrame as argument 
 	//this should be sorted into several other methods (i.e. resetPlayers so that matches can be more easily implemented)
-	public BattlePane(mainFrame maFrame)//add player class
+	public BattlePane(mainFrame maFrame, String player1, String player2)
 	{
 		currentRoundCount = 0;
 		Player1Wins = 0;
@@ -54,8 +54,8 @@ public class BattlePane extends JPanel{
 		NextRoundButton.setVisible(false);
 		
 		currentRoundCount += 1;
-		Player1= new Character(this, false,"keanu" );//"keanu");
-		Player2 = new Character(this, true, "randy");//"randy");
+		Player1= new Character(this, false, player1 );//"keanu");
+		Player2 = new Character(this, true, player2);//"randy");
 		currentCharacter = Player1;
 		otherCharacter = Player2;
 		updateStatus("");
