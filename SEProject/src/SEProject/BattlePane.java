@@ -28,6 +28,8 @@ public class BattlePane extends JPanel{
 	private int Player1Wins;
 	private int Player2Wins;
 	
+	private String status;
+	
 	//parameterized constructor takes mainFrame as argument 
 	//this should be sorted into several other methods (i.e. resetPlayers so that matches can be more easily implemented)
 	public BattlePane(mainFrame maFrame)//add player class
@@ -52,10 +54,11 @@ public class BattlePane extends JPanel{
 		NextRoundButton.setVisible(false);
 		
 		currentRoundCount += 1;
-		Player1= new Character(this, false,"goku" );//"keanu");
-		Player2 = new Character(this, true, "sam");//"randy");
+		Player1= new Character(this, false,"keanu" );//"keanu");
+		Player2 = new Character(this, true, "randy");//"randy");
 		currentCharacter = Player1;
 		otherCharacter = Player2;
+		updateStatus("");
 	}
 	
 	//resets buttons for next turn
@@ -68,24 +71,38 @@ public class BattlePane extends JPanel{
 			if(currentCharacter.equals(Player1))
 			{
 				System.out.println("Player 1 wins");
+				updateStatus("Player 1 has won the round");
 				Player1Wins ++;
 			}
 			else
 			{
 				System.out.println("Player 2 wins");
+				updateStatus("Player 2 has won the round");
 				Player2Wins ++;
 			}
 			if(checkBattleEnd())
+			{
 				showEndOfBattle();
+				if(Player1Wins > Player2Wins)
+					updateStatus("Player 1 has won the battle");
+				else
+					updateStatus("Player 2 has won the battle");
+			}
 			else
+			{
 				showEndOfRound();
+			}
 		}
 		swapCurrent();
 		updateHealButton();
 		enableButtons();
 		repaint();
 	}
-	//switch buttons on and off
+	//updates the status to the string passed in
+	public void updateStatus(String s)
+	{
+		status = s;
+	}
 	//swaps the current player and other player
 	public void swapCurrent()
 	   {
@@ -229,24 +246,16 @@ public class BattlePane extends JPanel{
 		super.paintComponent(g);
 		//a.drawMe(g, true);
 		//g.drawString(StatusLabel, 400, 700);
+		drawStatus(g);
 		drawHealthBars(g);
+		drawScore(g);
+
+		drawCurrentTurn(g);
 		otherCharacter.drawMe(g);
 		currentCharacter.drawMe(g);
-		g.setColor(new Color(0, 255, 0, 80));
-		setFont(new Font("Arial", Font.PLAIN, 40));
-		g.drawString("Round " + currentRoundCount, 520, 60);
-		g.drawString("Wins: " + Player1Wins, 40, 120);
-		g.drawString("Wins: " + Player2Wins, 950, 120);
-		if(currentCharacter.equals(Player1))
-		{
-			g.fillRect(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, 15);//mainFrame.FRAME_HEIGHT-150);
-		}
-		else
-		{
-			g.fillRect(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , 15);//mainFrame.FRAME_HEIGHT-150);
-		}
 		
-		
+
+
 	}
 	
 	//called by paintComponent, draws the health bars of the players based on their current and max health
@@ -266,7 +275,35 @@ public class BattlePane extends JPanel{
 		g.drawRect(OffSet, 40, 450, 30);
 		g.drawRect(mainFrame.FRAME_WIDTH-500, 40, 450, 30);
 	}
-	
+	//draws wins and round number
+	private void drawScore(Graphics g)
+	{
+		g.setColor(new Color(0, 255, 0, 80));
+		setFont(new Font("Arial", Font.PLAIN, 40));
+		g.drawString("Round " + currentRoundCount, 520, 60);
+		g.drawString("Wins: " + Player1Wins, 40, 120);
+		g.drawString("Wins: " + Player2Wins, 950, 120);
+	}
+	//draws the status to the screen
+	private void drawStatus(Graphics g)
+	{
+		g.setColor(new Color(0, 0, 255));
+		int l = status.length();
+		g.drawString(status, (mainFrame.FRAME_WIDTH/2)-((l*15)/2), 160);//this code si used for centering the string on the screen
+	}
+	//draws the rectangle indicating which player is currently active
+	private void drawCurrentTurn(Graphics g)
+	{
+		g.setColor(new Color(0, 255, 0, 80));
+		if(currentCharacter.equals(Player1))
+		{
+			g.fillRect(0, mainFrame.FRAME_HEIGHT-150, mainFrame.FRAME_WIDTH/2, 15);//mainFrame.FRAME_HEIGHT-150);
+		}
+		else
+		{
+			g.fillRect(mainFrame.FRAME_WIDTH/2, mainFrame.FRAME_HEIGHT-150,mainFrame.FRAME_WIDTH , 15);//mainFrame.FRAME_HEIGHT-150);
+		}
+	}	
 	//Uses a timer to display animation frames. disables buttons during the animation. The buttons are re-enabled at by the nextTurn method
 	private void performAttack()
 	{
