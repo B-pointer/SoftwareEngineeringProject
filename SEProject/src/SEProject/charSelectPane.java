@@ -87,16 +87,6 @@ public class charSelectPane extends JPanel {
 		if(selectionCount > 1)
 		{
 			addVersusScreen();
-			/*
-			try{
-				Thread.sleep(2000);
-			}
-			catch(InterruptedException e)
-			{
-				System.out.println("Error Here");
-			}
-			*/
-			//mFrame.setBattlePane();	//maybe make this sleep here or add a button or something prompting the player
 		}
 	}
 	

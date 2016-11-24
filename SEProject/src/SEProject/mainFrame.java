@@ -18,29 +18,6 @@ public class mainFrame extends JFrame {
 		setVisible(true);
 		setResizable(false);
 	}
-
-	//sets active panel to a new Pane1
-	public void set1()
-	{
-		getContentPane().removeAll();
-		getContentPane().invalidate();
-		
-		getContentPane().add(new Pane1(this));
-		getContentPane().revalidate();
-		
-	}
-	
-	//sets active panel to a new Pane2
-	public void set2()
-	{
-		getContentPane().removeAll();
-		getContentPane().invalidate();
-		
-		getContentPane().add(new Pane2(this));
-		getContentPane().revalidate();
-		
-	}
-	
 	
 	//sets active panel to new MainMenu
 	public void setMainMenu()
