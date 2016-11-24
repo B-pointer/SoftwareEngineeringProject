@@ -85,7 +85,7 @@ public class mainFrame extends JFrame {
 		getContentPane().removeAll();
 		getContentPane().invalidate();
 		
-		getContentPane().add(new BattlePane(this));
+		getContentPane().add(new BattlePane(this, charName1, charName2));
 		getContentPane().revalidate();
 		
 	}

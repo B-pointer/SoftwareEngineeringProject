@@ -28,6 +28,9 @@ public class BattlePane extends JPanel{
 	private int Player1Wins;
 	private int Player2Wins;
 	
+	private String player1Name;
+	private String player2Name;
+	
 	private String status;
 	
 	//parameterized constructor takes mainFrame as argument 
@@ -37,6 +40,8 @@ public class BattlePane extends JPanel{
 		currentRoundCount = 0;
 		Player1Wins = 0;
 		Player2Wins = 0;
+		player1Name = player1;
+		player2Name = player2;
 		mFrame = maFrame;
 		setLayout(null);
 		addButtons();
@@ -54,8 +59,8 @@ public class BattlePane extends JPanel{
 		NextRoundButton.setVisible(false);
 		
 		currentRoundCount += 1;
-		Player1= new Character(this, false, player1 );//"keanu");
-		Player2 = new Character(this, true, player2);//"randy");
+		Player1= new Character(this, false, player1Name );//"keanu");
+		Player2 = new Character(this, true, player2Name);//"randy");
 		currentCharacter = Player1;
 		otherCharacter = Player2;
 		updateStatus("");
@@ -278,7 +283,7 @@ public class BattlePane extends JPanel{
 	//draws wins and round number
 	private void drawScore(Graphics g)
 	{
-		g.setColor(new Color(0, 255, 0, 80));
+		g.setColor(new Color(0, 255, 0));//, 80));
 		setFont(new Font("Arial", Font.PLAIN, 40));
 		g.drawString("Round " + currentRoundCount, 520, 60);
 		g.drawString("Wins: " + Player1Wins, 40, 120);

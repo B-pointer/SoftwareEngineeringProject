@@ -12,22 +12,19 @@ public class charSelectPane extends JPanel {
 	private int selectionCount;
 	private int firstCharacterID;
 	private int secondCharacterID;
+	private String firstCharacterName;
+	private String secondCharacterName;
 	
 	public charSelectPane(mainFrame frame)
 	{
 		mFrame = frame;
 		setBackground(Color.MAGENTA);
-		
-		
 		firstCharacterID=-1;
 		secondCharacterID=-1;
-		
 		buttonList = new ArrayList<JButton>();
-		
 		selectionCount = 0;
 		getImages();
 		addButtons();
-		
 		setVisible(true);
 		
 	}
@@ -37,7 +34,7 @@ public class charSelectPane extends JPanel {
 		imageList = new ArrayList<ImageIcon>();
 		for(int i=0; i < NUMBER_BUTTONS; i++)
 		{
-			ImageIcon ii = new ImageIcon("charSelectImages/charSel" + i + ".png");
+			ImageIcon ii = new ImageIcon("charSelectImages/charSel" + (i+1) + ".png");
 			imageList.add(ii);
 		}
 	}
@@ -62,19 +59,24 @@ public class charSelectPane extends JPanel {
 	private void assignNextCharacter(int charID)
 	{
 		if(firstCharacterID < 0)
+		{
 			firstCharacterID = charID;
+			firstCharacterName = getStringNameExample(firstCharacterID);
+		}
 		else
+		{
 			secondCharacterID = charID;
-		
+			secondCharacterName = getStringNameExample(secondCharacterID);
+		}
 	}
 	
 	private String getStringNameExample(int x)
 	{
 		switch(x){
-			case 0: return "Jimmy";
-			case 1: return "Paul";
-			case 2: return "John";
-			case 3: return "Charlie";
+			case 0: return "goku";
+			case 1: return "keanu";
+			case 2: return "randy";
+			case 3: return "sam";
 			default: return "error";
 		}
 		
@@ -108,14 +110,14 @@ public class charSelectPane extends JPanel {
 		setBackground(Color.gray);
 		JButton left  = new JButton();
 		left.setBorder(BorderFactory.createEmptyBorder());
-		left.setIcon(imageList.get(1));/////bleh
+		left.setIcon(imageList.get(firstCharacterID));/////bleh
 		left.setContentAreaFilled(false);
 		left.setFocusable(false);
-		JButton right =  new JButton(imageList.get(1));
+		JButton right =  new JButton(imageList.get(secondCharacterID));
 		right.setBorder(BorderFactory.createEmptyBorder());
 		right.setContentAreaFilled(false);
 		right.setFocusable(false);
-		JLabel vs = new JLabel("              "+ getStringNameExample(firstCharacterID) + "   VS   "+ getStringNameExample(secondCharacterID));
+		JLabel vs = new JLabel("        "+ firstCharacterName.toUpperCase() + "   VS   "+ secondCharacterName.toUpperCase());
 		vs.setFont(new Font("Arial", Font.PLAIN, 50));
 		
 		setLayout(new BorderLayout());
@@ -151,7 +153,7 @@ public class charSelectPane extends JPanel {
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			mFrame.setBattlePane();
+			mFrame.setBattlePane(firstCharacterName, secondCharacterName);
 		}
 	}
 }
