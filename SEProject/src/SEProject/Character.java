@@ -86,6 +86,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	/*
 	 * Methods related to setting character stats for each different character
 	 */
+	//chooses how to initialize character stats based on the cahracter name passed in during construction of the character
 	private void initCharacterStats()
 	{
 		switch(characterName)
@@ -148,10 +149,10 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	      {
 	    	  //ii = new ImageIcon("characterImages/Man0001.png");
 	    	  //ii = new ImageIcon("characterImages/sam"+i + ".png");
-	    	  ii = new ImageIcon("characterImages/" + characterName + i +  ".png");
+	    	  ii = new ImageIcon("images/characterImages/" + characterName + i +  ".png");
 	    	  ImageList[i-1] = ii.getImage();
 	      }
-	      ii = new ImageIcon("characterImages/aura.png");
+	      ii = new ImageIcon("images/characterImages/aura.png");
 	      auraImage = ii.getImage();
 	      //System.out.println("length of array= " +ImageList.length);
 	}
@@ -210,12 +211,11 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 			currentHealth = maxHealth;
 		potionCount --;
 	}
-	//increments number of rounds won
 	/*
 	 * Helper Methods for battle actions and code related to attack animation
 	 */
 	//deals damage, called by other player class in the battle
-	private void dealDamage(int damage)//
+	public void dealDamage(int damage)//
 	{
 		currentHealth -= damage;
 		if(currentHealth < 0)

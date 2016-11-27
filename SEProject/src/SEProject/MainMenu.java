@@ -14,22 +14,23 @@ public class MainMenu extends JPanel{
 	private final int buttonLength = 100;
 	private final int buttonHeight = 40;
 	private Image background;
-	
+	//constructor
 	public MainMenu(mainFrame maFrame)
 	{
 		setLayout(null);
 		this.mFrame = maFrame;
 		addButtons();
 		setBackground(Color.GREEN);
-		ImageIcon ii = new ImageIcon("backgroundImages/mainMenuBackground.png");
+		ImageIcon ii = new ImageIcon("images/backgroundImages/mainMenuBackground.png");
 		background = ii.getImage();
 		mFrame.add(this);
 	}	
+	//adds buttons to menu screen
 	public void addButtons()
 	{
 		
 		StartButton = new JButton();//"Start Battle");
-		StartButton.setIcon(new ImageIcon("backgroundImages/StartBattleButton.png"));
+		StartButton.setIcon(new ImageIcon("images/backgroundImages/StartBattleButton.png"));
 		StartButton.setContentAreaFilled(false);
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
 		StartButton.setBounds(420, 300, 360, 120);
@@ -37,7 +38,7 @@ public class MainMenu extends JPanel{
 		add(StartButton);
 		
 		CharInfoButton = new JButton();//"Character Info");
-		CharInfoButton.setIcon(new ImageIcon("backgroundImages/CharacterInfoButton.png"));
+		CharInfoButton.setIcon(new ImageIcon("images/backgroundImages/CharacterInfoButton.png"));
 		CharInfoButton.setContentAreaFilled(false);
 		CharInfoButton.setBorder(BorderFactory.createEmptyBorder());
 		CharInfoButton.addActionListener(new CharInfoListener());
@@ -46,7 +47,7 @@ public class MainMenu extends JPanel{
 		
 		
 		ExitButton = new JButton();//"Exit Game");
-		ExitButton.setIcon(new ImageIcon("backgroundImages/ExitButton.png"));
+		ExitButton.setIcon(new ImageIcon("images/backgroundImages/ExitButton.png"));
 		ExitButton.setContentAreaFilled(false);
 		ExitButton.setBorder(BorderFactory.createEmptyBorder());
 		ExitButton.addActionListener(new ExitListener());
@@ -55,7 +56,7 @@ public class MainMenu extends JPanel{
 		
 		//add(buttonPanel, BorderLayout.SOUTH);
 	}
-	
+	//overridden paintComponent method, draws images for menu screen
 	public void paintComponent(Graphics g)
 	{
 		g.drawImage(background, 0, 0, this);

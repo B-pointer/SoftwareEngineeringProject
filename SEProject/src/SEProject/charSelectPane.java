@@ -14,7 +14,7 @@ public class charSelectPane extends JPanel {
 	private int secondCharacterID;
 	private String firstCharacterName;
 	private String secondCharacterName;
-	
+	//constructor
 	public charSelectPane(mainFrame frame)
 	{
 		mFrame = frame;
@@ -28,17 +28,17 @@ public class charSelectPane extends JPanel {
 		setVisible(true);
 		
 	}
-	
+	//loads images for the buttons for cahracter seelction
 	private void getImages()
 	{
 		imageList = new ArrayList<ImageIcon>();
 		for(int i=0; i < NUMBER_BUTTONS; i++)
 		{
-			ImageIcon ii = new ImageIcon("charSelectImages/charSel" + (i+1) + ".png");
+			ImageIcon ii = new ImageIcon("images/charSelectImages/charSel" + (i+1) + ".png");
 			imageList.add(ii);
 		}
 	}
-	
+	//adds the buttons and pictures
 	private void addButtons()
 	{
 		for(int i=0; i < NUMBER_BUTTONS; i++)
@@ -56,6 +56,7 @@ public class charSelectPane extends JPanel {
 			add(aButton);
 		}
 	}
+	//assigns next available character to the selection made with the buttons. Assigns integer to characterID and string to characterName
 	private void assignNextCharacter(int charID)
 	{
 		if(firstCharacterID < 0)
@@ -69,7 +70,7 @@ public class charSelectPane extends JPanel {
 			secondCharacterName = getStringNameExample(secondCharacterID);
 		}
 	}
-	
+	//gets string name based off int argument
 	private String getStringNameExample(int x)
 	{
 		switch(x){
@@ -81,16 +82,16 @@ public class charSelectPane extends JPanel {
 		}
 		
 	}
-	
-	public void checkIfComplete() 
+	//checks if both characters have been assigned values
+	private void checkIfComplete() 
 	{
 		if(selectionCount > 1)
 		{
 			addVersusScreen();
 		}
 	}
-	
-	public void addVersusScreen()//example code, should be changed to something else, possibly not using buttons as pictures
+	//adds the versus screen, indicating that both characters have been selected and prompts the user to start the battle
+	private void addVersusScreen()
 	{
 		for(JButton a: buttonList)
 		{
@@ -126,7 +127,7 @@ public class charSelectPane extends JPanel {
 		//repaint();
 
 	}
-	
+	//listener for character selection buttons
 	private class SelectListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -139,6 +140,7 @@ public class charSelectPane extends JPanel {
 			checkIfComplete();
 		}
 	}
+	//listener for the Start Battle Button
 	private class StartListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)

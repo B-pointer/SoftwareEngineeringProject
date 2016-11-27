@@ -50,13 +50,13 @@ public class CharacterInfoPane extends JPanel{
 	//loads all images
 	public void loadImages()
 	{
-		ImageIcon ii = new ImageIcon("characterInfoImages/goku1.png");
+		ImageIcon ii = new ImageIcon("images/characterInfoImages/goku1.png");
 		gokuImg = ii.getImage(); 
-		ii = new ImageIcon("characterInfoImages/sam1.png");
+		ii = new ImageIcon("images/characterInfoImages/sam1.png");
 		samImg = ii.getImage();
-		ii = new ImageIcon("characterInfoImages/keanu1.png");
+		ii = new ImageIcon("images/characterInfoImages/keanu1.png");
 		keanuImg = ii.getImage();
-		ii = new ImageIcon("characterInfoImages/randy1.png");
+		ii = new ImageIcon("images/characterInfoImages/randy1.png");
 		randyImg = ii.getImage();
 	}
 	//draws all of the images representing the cahracters
