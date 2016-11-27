@@ -1,6 +1,7 @@
 package SEProject;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -50,13 +51,21 @@ public class CharacterInfoPane extends JPanel{
 	//loads all images
 	public void loadImages()
 	{
-		ImageIcon ii = new ImageIcon("images/characterInfoImages/goku1.png");
+		URL url = CharacterInfoPane.class.getResource("/characterInfoImages/goku1.png");
+		ImageIcon ii = new ImageIcon(url);
+		System.out.println("with goku url");
 		gokuImg = ii.getImage(); 
-		ii = new ImageIcon("images/characterInfoImages/sam1.png");
+		url = CharacterInfoPane.class.getResource("/characterInfoImages/sam1.png");
+		ii = new ImageIcon(url);
+		System.out.println("with sam url");
 		samImg = ii.getImage();
-		ii = new ImageIcon("images/characterInfoImages/keanu1.png");
+		url = CharacterInfoPane.class.getResource("/characterInfoImages/keanu1.png");
+		ii = new ImageIcon(url);
+		System.out.println("with keanu url");
 		keanuImg = ii.getImage();
-		ii = new ImageIcon("images/characterInfoImages/randy1.png");
+		url = CharacterInfoPane.class.getResource("/characterInfoImages/randy1.png");
+		ii = new ImageIcon(url);
+		System.out.println("with randy url");
 		randyImg = ii.getImage();
 	}
 	//draws all of the images representing the cahracters

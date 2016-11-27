@@ -2,6 +2,8 @@ package SEProject;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
+
 import javax.swing.*;
 import java.util.Random;
 
@@ -149,10 +151,13 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	      {
 	    	  //ii = new ImageIcon("characterImages/Man0001.png");
 	    	  //ii = new ImageIcon("characterImages/sam"+i + ".png");
-	    	  ii = new ImageIcon("images/characterImages/" + characterName + i +  ".png");
+	    	  URL url = CharacterInfoPane.class.getResource("/characterImages/" + characterName + i +  ".png");
+	    	  ii = new ImageIcon(url);
 	    	  ImageList[i-1] = ii.getImage();
 	      }
-	      ii = new ImageIcon("images/characterImages/aura.png");
+	      System.out.println("with character url");
+	      URL url = CharacterInfoPane.class.getResource("/characterImages/aura.png");
+	      ii = new ImageIcon(url);
 	      auraImage = ii.getImage();
 	      //System.out.println("length of array= " +ImageList.length);
 	}

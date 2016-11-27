@@ -1,6 +1,7 @@
 package SEProject;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -21,7 +22,9 @@ public class MainMenu extends JPanel{
 		this.mFrame = maFrame;
 		addButtons();
 		setBackground(Color.GREEN);
-		ImageIcon ii = new ImageIcon("images/backgroundImages/mainMenuBackground.png");
+		URL url = MainMenu.class.getResource("/backgroundImages/mainMenuBackground.png");
+		System.out.println("Here is URL version123123123");
+		ImageIcon ii = new ImageIcon(url);
 		background = ii.getImage();
 		mFrame.add(this);
 	}	
@@ -30,7 +33,8 @@ public class MainMenu extends JPanel{
 	{
 		
 		StartButton = new JButton();//"Start Battle");
-		StartButton.setIcon(new ImageIcon("images/backgroundImages/StartBattleButton.png"));
+		URL url = MainMenu.class.getResource("/backgroundImages/StartBattleButton.png");
+		StartButton.setIcon(new ImageIcon(url));
 		StartButton.setContentAreaFilled(false);
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
 		StartButton.setBounds(420, 300, 360, 120);
@@ -38,7 +42,8 @@ public class MainMenu extends JPanel{
 		add(StartButton);
 		
 		CharInfoButton = new JButton();//"Character Info");
-		CharInfoButton.setIcon(new ImageIcon("images/backgroundImages/CharacterInfoButton.png"));
+		url = MainMenu.class.getResource("/backgroundImages/CharacterInfoButton.png");
+		CharInfoButton.setIcon(new ImageIcon(url));
 		CharInfoButton.setContentAreaFilled(false);
 		CharInfoButton.setBorder(BorderFactory.createEmptyBorder());
 		CharInfoButton.addActionListener(new CharInfoListener());
@@ -47,7 +52,8 @@ public class MainMenu extends JPanel{
 		
 		
 		ExitButton = new JButton();//"Exit Game");
-		ExitButton.setIcon(new ImageIcon("images/backgroundImages/ExitButton.png"));
+		url = MainMenu.class.getResource("/backgroundImages/ExitButton.png");
+		ExitButton.setIcon(new ImageIcon(url));
 		ExitButton.setContentAreaFilled(false);
 		ExitButton.setBorder(BorderFactory.createEmptyBorder());
 		ExitButton.addActionListener(new ExitListener());

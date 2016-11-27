@@ -1,6 +1,8 @@
 package SEProject;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
+
 import javax.swing.*;
 import java.util.ArrayList;
 public class charSelectPane extends JPanel {
@@ -34,7 +36,8 @@ public class charSelectPane extends JPanel {
 		imageList = new ArrayList<ImageIcon>();
 		for(int i=0; i < NUMBER_BUTTONS; i++)
 		{
-			ImageIcon ii = new ImageIcon("images/charSelectImages/charSel" + (i+1) + ".png");
+			URL url = CharacterInfoPane.class.getResource("/charSelectImages/charSel" + (i+1) + ".png");
+			ImageIcon ii = new ImageIcon(url);
 			imageList.add(ii);
 		}
 	}
