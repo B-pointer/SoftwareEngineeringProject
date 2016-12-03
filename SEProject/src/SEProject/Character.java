@@ -122,7 +122,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	
 	private void initAsKeanu()//definitely changes these values
 	{
-		maxHealth= 85;
+		maxHealth= 485;
 		currentHealth= maxHealth;
 		potionCount = 3;	
 		isCharged = false;
@@ -132,7 +132,7 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	
 	private void initAsRandy()//definitely changes these values
 	{
-		maxHealth= 100;
+		maxHealth= 505;
 		currentHealth= maxHealth;
 		potionCount = 3;	
 		isCharged = false;
