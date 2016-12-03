@@ -12,8 +12,6 @@ public class MainMenu extends JPanel{
 	JButton StartButton; //buttons for navigation
 	JButton CharInfoButton;
 	JButton ExitButton;
-	private final int buttonLength = 100;
-	private final int buttonHeight = 40;
 	private Image background;
 	//constructor
 	public MainMenu(mainFrame maFrame)

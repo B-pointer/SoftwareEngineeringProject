@@ -29,7 +29,6 @@ public class Character {//extends AbstractCharacter{ ///throughout this need to 
 	private int x;//
 	private int y;//
 	private int attackPower;
-	private int defense;
 	private boolean isCharged;//
 	private int rateOfSuccess;//
 	private int potionCount;//
